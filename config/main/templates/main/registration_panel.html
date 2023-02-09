@@ -1,0 +1,26 @@
+<div class="registration_panel">
+    {% if user.is_authenticated %}
+    <div class="log_in_and_register">
+        <div class="username_container">
+            <p class="username_title">Username</p>
+            <a class="username">{{user}}</a>
+        </div>
+        <div class="role_container">
+            <p class="role_title">Role</p>
+            <a class="role">{{role}}</a>
+        </div>
+        <div class="user_info_vert_line_container">
+            <div class="user_info_vert_line"></div>
+        </div>
+
+        <div class="logout_button_container">
+            <a href="{% url 'logout' %}" class="register reg_buttons">Log out</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="log_in_and_register">
+        <a href="{% url 'login_view' %}" class="log_in reg_buttons">Log in</a>
+        <a href="{% url 'registration' %}" class="register reg_buttons">Register</a>
+    </div>
+    {% endif %}
+</div>

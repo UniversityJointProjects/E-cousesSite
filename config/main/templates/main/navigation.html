@@ -1,0 +1,21 @@
+{% load static %}
+<aside>
+        <img src="{% static 'main/img/logo.png' %}" alt="logo">
+        <span class="logo">Amnis</span>
+        <h3 class="navigation_title">Navigation</h3>
+        <ul>
+            <a href="{% url 'introduce' %}"><li><i class="bi bi-list-task"></i>  Introduction</li></a>
+            <hr>
+            <a href="{% url 'table_show' 0 %}"><li><i class="bi bi-star-fill"></i>  Shops quality</li></a>
+            <a href="{% url 'table_show' 1 %}"><li><i class="bi bi-bag-heart-fill"></i></i>  Shops</li></a>
+            {% if role == 'Director' %}
+            <a href="{% url 'table_show' 2 %}"><li><i class="bi bi-person-fill"></i></i>  Directors</li></a>
+            <a href="{% url 'table_show' 3 %}"><li><i class="bi bi-buildings"></i>  Firms</li></a>
+            {% endif %}
+            <a href="{% url 'table_show' 4 %}"><li><i class="bi bi-egg-fill"></i>  Products</li></a>
+            {% if role == 'Director' %}
+            <a href="{% url 'table_show' 5 %}"><li><i class="bi bi-card-list"></i>  Checks</li></a>
+            {% endif %}
+            <hr>
+        </ul>
+</aside>
