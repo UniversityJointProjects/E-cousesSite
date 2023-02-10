@@ -20,32 +20,40 @@
             Личный кабинет
         </h1>
         <div class="common_form up_container">
+            <form method="post" class="profile_form">
+                {% csrf_token %}
+                <div class="block_fields">
+                    <div>Имя</div>
+                    <div class="input_fields"> <input type="text" name="name" placeholder="Введите имя..." class="common_form_input_field"> </div>
+                    <div class="text_fields">Фамилия</div>
+                    <div class="input_fields"> <input type="text" name="second_name" placeholder="Введите фамилию..." class="common_form_input_field" ></div>
+                </div>
 
-                <form method="post" class="profile_form">
-                    {% csrf_token %}
-                    <div class="block_fields">
-                        <div class="text_fields">Имя</div>
-                        <div class="input_fields"> <input type="text" name="name" placeholder="Введите имя..." class="common_form_input_field"> </div>
-                        <div class="text_fields">Фамилия</div>
-                        <div class="input_fields"> <input type="text" name="second_name" placeholder="Введите фамилию..." class="common_form_input_field" ></div>
-                    </div>
-                    <div class="block_fields">
-                        <div class="text_fields">Город</div>
-                        <div class="input_fields"> <input type="text" name="city" placeholder="Введите город..." class="common_form_input_field" ></div>
-                        <div class="text_fields">Email</div>
-                        <div class="input_fields"> <input type="email" name="email" placeholder="Введите email..." class="common_form_input_field" ></div>
-                    </div>
-                    <div>
-                        <div class="text_fields">Информация о себе</div>
-                        <div class="input_fields"> <textarea rows="5" cols="33" name="bio" placeholder="Расскажите о себе..." class="common_form_input_field bio_textarea_size" ></textarea></div>
-                    </div>
-                    <div>
-                        <div class="text_fields">Фото</div>
-                        <div class="input_fields"> <input type="file" name="ava" placeholder="Расскажите о себе..." class="common_form_input_field bio_textarea_size" ></input></div>
-                    </div>
+                <div class="block_fields">
+                    <div>Город</div>
+                    <div class="input_fields"> <input type="text" name="city" placeholder="Введите город..." class="common_form_input_field" ></div>
+                    <div class="text_fields">Email</div>
+                    <div class="input_fields"> <input type="email" name="email" placeholder="Введите email..." class="common_form_input_field" ></div>
+                </div>
 
-                </form>
-<!--                <div class="button_submit"><button>Подтвердить</button></div>-->
+                <div class="block_fields">
+                    <div>Информация о себе</div>
+                    <div class="input_fields"> <textarea rows="5" cols="33" name="bio" placeholder="Расскажите о себе..." class="common_form_input_field bio_textarea_size" ></textarea></div>
+                </div>
+
+                <div class="input_avatar_image">
+                    <img class="avatar_image" src="static/main/img/dummy_avatar.svg">
+                    <label class="input-file">
+                        <input type="file" name="file">
+                        <span>Изменить</span>
+                    </label>
+                </div>
+
+            </form>
+
+            <div class="button_submit">
+                <button class="button1 button1_padding green-button button1_size">Обновить</button>
+            </div>
 
 
 

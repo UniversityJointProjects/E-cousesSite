@@ -1,0 +1,51 @@
+{% load static %}
+{% load l10n %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Объявления</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/logo.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'main/css/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/announcements.css'%}">
+</head>
+<body>
+    {% include 'main/navigation.html' %}
+    <div class="registration_panel">
+        {% include 'main/registration_panel.html' %}
+    </div>
+    <div class="announcements_container main_section__announcements_container">
+        <h1 class="announcements_text_title">Объявления</h1>
+        {% for announcement in announcements %}
+            <div class="announcements announcements_container__announcements">
+                <div class="announcements_header">
+                    <div class="announcements_avatar">
+                        <img src="static/main/img/dummy_avatar.svg">
+                    </div>
+                    <div class="announcements_preview">
+                        <div>
+                            <div class="announcements_text_header">
+                                <h5>{{announcement.title}}</h5>
+                            </div>
+                            <div class="announcements_author">
+                                <h5>{{announcement.author}}</h5>
+                            </div>
+                        </div>
+                        <div class="announcements_date">
+                            <h5>{{announcement.date|localize}}</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="announcements_text">
+                    <h5>{{announcement.text|linebreaks}}</h5>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
