@@ -130,3 +130,16 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'News'
         verbose_name_plural = 'News'
+
+
+
+
+class Announcement(models.Model):
+    class Meta:
+        verbose_name = "Объявление"
+        verbose_name_plural = "Объявления"
+
+    title = models.CharField("Title", max_length=50)
+    date = models.DateField("Date")
+    author = models.CharField("Author", max_length=50)
+    text = models.TextField("Text")

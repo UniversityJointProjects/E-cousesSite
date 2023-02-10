@@ -31,6 +31,14 @@ def introduce(request):
     return render(request, "main/introduce.html", {'role': role})
 
 
+def announcements(request):
+    role = get_role(request.user)
+    data = reversed(Announcement.objects.all())
+
+    return render(request, "main/announcements.html", {'role': role, "announcements": data})
+
+
+
 def change_table(request, url_table_id, entry_id, command):
     forms = [ShopQualityForm, ShopForm, DirectorForm, FirmForm, ProductForm, CheckForm]
     existing_models = [ShopQuality, Shop, Director, Firm, Product, Check]
