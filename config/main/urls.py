@@ -9,5 +9,7 @@ urlpatterns = [
     path('registration', views.registration, name='registration'),
     path('login_view', views.login_view, name='login_view'),
     # LOGOUT_REDIRECT_URL
-    path('logout', include('django.contrib.auth.urls'), name='logout')
+    path('logout', include('django.contrib.auth.urls'), name='logout'),
+    path('course/<int:course_id>', views.course_view, name='course'),
+    path('course/course_change/<command>/<int:course_id>', views.course_change_view, name='course_change')
 ]

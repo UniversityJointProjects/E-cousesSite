@@ -177,3 +177,20 @@ class CreateUserForm(UserCreationForm):
                 attrs={'class': 'common_form_input_field',
                        'placeholder': 'Repeat the password...'}),
         }
+
+
+class CourseForm(ModelForm):
+    class Meta:
+        model = Course
+        fields = ['title', 'date', 'time_to_read', 'content']
+        widgets = {
+            "title": forms.TextInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите заголовок...'}),
+            "date": forms.TextInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите дату...'}),
+            "time_to_read": forms.DateInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите время для прочтения...'})
+        }

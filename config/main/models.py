@@ -1,5 +1,6 @@
 import datetime as datetime
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class ShopQuality(models.Model):
@@ -116,6 +117,21 @@ class Check(models.Model):
     class Meta:
         verbose_name = "Check"
         verbose_name_plural = "Checks"
+
+
+class Course(models.Model):
+
+    title = models.CharField('Title', max_length=250)
+    date = models.DateField('Date', default=datetime.date(1, 1, 1))
+    time_to_read = models.CharField('Time to read', max_length=50)
+    content = RichTextField(blank=True, null=True)
+
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
+        verbose_name = "Course"
+        verbose_name_plural = "Courses"
 
 
 class Article(models.Model):

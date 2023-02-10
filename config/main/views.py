@@ -122,3 +122,22 @@ def login_view(request):
             return redirect('introduce')
     return render(request, 'main/login.html', {'role': role})
 
+
+def course_view(request, course_id):
+    course = Course.objects.all()[0]
+    return render(request, 'main/course.html', {'course': course})
+
+
+def course_change_view(request, command, course_id):
+    course_form = CourseForm()
+
+    error = ''
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('introduce')
+        else:
+            error = 'Вы ввели некорректные данные*'
+
+    return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error})
