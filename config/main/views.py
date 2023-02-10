@@ -122,3 +122,6 @@ def login_view(request):
             return redirect('introduce')
     return render(request, 'main/login.html', {'role': role})
 
+
+def profile(request):
+    return render(request, 'main/profile.html', {})
