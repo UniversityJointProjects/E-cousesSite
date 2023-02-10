@@ -10,19 +10,20 @@
     <link rel="icon" type="image/x-icon" href="{% static 'main/img/logo.png' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{% static 'main/css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/login.css'%}">
 </head>
 <body>
     {% include 'main/navigation.html' %}
-    <div class="table_change_form_container">
-        <form class="table_change_form" method="post">
+    <div class="login_form_container">
+        <form class="common_form" method="post">
             {% csrf_token %}
-            <h2 class="registration_title">Logging in</h2>
-            <div class="table_change_form_name table_change_form_name_first">Username</div>
-            <input type="text" name="username" placeholder="Enter login..." class="table_change_input_field">
-            <div class="table_change_form_name">Password</div>
-            <input type="password" name="password" placeholder="Enter password..." class="table_change_input_field" >
-            <button class="login_button" type="submit">Log in</button>
+            <h2 class="common_form__common_form_title">Logging in</h2>
+            <div class="common_form_name common_form__common_form_name">Username</div>
+            <input type="text" name="username" placeholder="Enter login..." class="common_form_input_field">
+            <div class="common_form_name common_form__common_form_name">Password</div>
+            <input type="password" name="password" placeholder="Enter password..." class="common_form_input_field" >
+            <button class="button1 button1_padding cyan-button login_form_button1" type="submit">Log in</button>
         </form>
     </div>
 </body>

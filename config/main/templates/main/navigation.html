@@ -1,20 +1,50 @@
 {% load static %}
-<aside>
+<aside class="navigation_sidebar">
+        <link rel="stylesheet" href="{% static 'main/css/navigation.css'%}">
         <img src="{% static 'main/img/logo.png' %}" alt="logo">
         <span class="logo">Amnis</span>
-        <h3 class="navigation_title">Navigation</h3>
-        <ul>
-            <a href="{% url 'introduce' %}"><li><i class="bi bi-list-task"></i>  Introduction</li></a>
+        <ul class="navigation_list navigation_sidebar__navigation_list">
+            <a class="navigation_list_ref" href="{% url 'introduce' %}">
+                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Личный кабинет</li>
+            </a>
+            <a class="navigation_list_ref" href="{% url 'introduce' %}">
+                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Ваши курсы</li>
+            </a>
+            <a class="navigation_list_ref" href="{% url 'introduce' %}">
+                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Расписание</li>
+            </a>
+            <a class="navigation_list_ref" href="{% url 'introduce' %}">
+                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Все курсы</li>
+            </a>
+            <a class="navigation_list_ref" href="{% url 'introduce' %}">
+                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Создание курса (Админ)</li>
+            </a>
             <hr>
-            <a href="{% url 'table_show' 0 %}"><li><i class="bi bi-star-fill"></i>  Shops quality</li></a>
-            <a href="{% url 'table_show' 1 %}"><li><i class="bi bi-bag-heart-fill"></i></i>  Shops</li></a>
+            <a class="navigation_list_ref" href="{% url 'introduce' %}">
+                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Introduction</li>
+            </a>
+            <hr>
+            <a class="navigation_list_ref" href="{% url 'table_show' 0 %}">
+                <li class="navigation_list_element"><i class="bi bi-star-fill"></i>  Shops quality</li>
+            </a>
+            <a class="navigation_list_ref" href="{% url 'table_show' 1 %}">
+                <li class="navigation_list_element"><i class="bi bi-bag-heart-fill"></i></i>  Shops</li>
+            </a>
             {% if role == 'Director' %}
-            <a href="{% url 'table_show' 2 %}"><li><i class="bi bi-person-fill"></i></i>  Directors</li></a>
-            <a href="{% url 'table_show' 3 %}"><li><i class="bi bi-buildings"></i>  Firms</li></a>
+            <a class="navigation_list_ref" href="{% url 'table_show' 2 %}">
+                <li class="navigation_list_element"><i class="bi bi-person-fill"></i></i>  Directors</li>
+            </a>
+            <a class="navigation_list_ref" href="{% url 'table_show' 3 %}">
+                <li class="navigation_list_element"><i class="bi bi-buildings"></i>  Firms</li>
+            </a>
             {% endif %}
-            <a href="{% url 'table_show' 4 %}"><li><i class="bi bi-egg-fill"></i>  Products</li></a>
+            <a class="navigation_list_ref" href="{% url 'table_show' 4 %}">
+                <li class="navigation_list_element"><i class="bi bi-egg-fill"></i>  Products</li>
+            </a>
             {% if role == 'Director' %}
-            <a href="{% url 'table_show' 5 %}"><li><i class="bi bi-card-list"></i>  Checks</li></a>
+            <a class="navigation_list_ref" href="{% url 'table_show' 5 %}">
+                <li class="navigation_list_element"><i class="bi bi-card-list"></i>  Checks</li>
+            </a>
             {% endif %}
             <hr>
         </ul>

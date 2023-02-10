@@ -20,13 +20,13 @@ class ShopQualityForm(ModelForm):
         fields = ['cleanliness', 'staff_courtesy', 'products_quality']
         widgets = {
             "cleanliness": forms.NumberInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + ShopQuality.names[1].lower() + '...'}),
             "staff_courtesy": forms.NumberInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + ShopQuality.names[2].lower() + '...'}),
             "products_quality": forms.NumberInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + ShopQuality.names[3].lower() + '...' })
         }
 
@@ -46,13 +46,13 @@ class ShopForm(ModelForm):
         fields = ['name', 'employees_number', 'shop_quality_id']
         widgets = {
             "name": TextInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Shop.names[1].lower() + '...'}),
             "employees_number": forms.NumberInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Shop.names[2].lower() + '...'}),
             "shop_quality_id": forms.Select(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Shop.names[3].lower() + '...' })
         }
 
@@ -72,10 +72,10 @@ class DirectorForm(ModelForm):
         fields = ['name', 'age']
         widgets = {
             "name": TextInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Director.names[1].lower() + '...'}),
             "age": forms.NumberInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Director.names[2].lower() + '...'})
         }
 
@@ -95,13 +95,13 @@ class FirmForm(ModelForm):
         fields = ['name', 'capitalization', 'directors']
         widgets = {
             "name": TextInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Firm.names[1].lower() + '...'}),
             "capitalization": forms.NumberInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Firm.names[2].lower() + '...'}),
             "directors": forms.SelectMultiple(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Firm.names[3].lower() + '...'})
         }
 
@@ -121,13 +121,13 @@ class ProductForm(ModelForm):
         fields = ['name', 'cost', 'firm_id']
         widgets = {
             "name": TextInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Product.names[1].lower() + '...'}),
             "cost": forms.NumberInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Product.names[2].lower() + '...'}),
             "firm_id": forms.Select(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Product.names[3].lower() + '...'})
         }
 
@@ -147,16 +147,16 @@ class CheckForm(ModelForm):
         fields = ['datetime', 'cost', 'product_id', 'shop_id']
         widgets = {
             "datetime": forms.DateTimeInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Check.names[1].lower() + '...'}),
             "cost": forms.NumberInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Check.names[2].lower() + '...'}),
             "product_id": forms.Select(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Check.names[3].lower() + '...'}),
             "shop_id": forms.Select(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter ' + Check.names[4].lower() + '...'})
         }
 
@@ -168,12 +168,12 @@ class CreateUserForm(UserCreationForm):
 
         widgets = {
             "username": forms.TextInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter username...'}),
             "password1": forms.PasswordInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Enter password...'}),
             "password2": forms.PasswordInput(
-                attrs={'class': 'table_change_input_field',
+                attrs={'class': 'common_form_input_field',
                        'placeholder': 'Repeat the password...'}),
         }

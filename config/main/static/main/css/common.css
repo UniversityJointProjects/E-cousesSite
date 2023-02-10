@@ -1,0 +1,131 @@
+:root {
+    --white-color: #ffffff;
+    --white-color-hover: #dddddd;
+    --white-color-active: #aaaaaa;
+
+    --add-green-color: #26e144;
+    --add-green-color-hover: #23cc3f;
+    --add-green-color-active: #1eb337;
+
+    --cyan-color: #75fbf6;
+    --cyan-color-hover: #02e3dc;
+    --cyan-color-active: #00bfb9;
+
+    --magenta-color: #ea337b;
+    --magenta-color-hover: #cc2d6d;
+    --magenta-color-active: #b3275f;
+
+    --dark-white9-color: #999999;
+
+    --darkgrey2-color: #222222;
+    --darkgrey-color: #333333;
+    --darkgrey-color-hover: #2b2b2b;
+    --semi-darkgrey-color: #414141;
+
+    --dark-cyan-color: #173f4c;
+}
+
+.green-button {
+    background-color: var(--add-green-color);
+}
+
+.green-button:hover {
+    background-color: var(--add-green-color-hover);
+}
+
+.green-button:active {
+    background-color: var(--add-green-color-active);
+}
+
+
+.cyan-button {
+    background-color: var(--cyan-color);
+}
+
+.cyan-button:hover {
+    background-color: var(--cyan-color-hover);
+}
+
+.cyan-button:active{
+    background-color: var(--cyan-color-active);
+}
+
+.magenta-button {
+    background-color: var(--magenta-color);
+}
+
+.magenta-button:hover {
+    background-color: var(--magenta-color-hover);
+}
+
+.magenta-button:active {
+    background-color: var(--magenta-color-active);
+}
+
+
+.button1 {
+    padding: 5px 80px 5px 80px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    border-style: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.button1:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.button1:active{
+    color: black;
+    text-decoration: none;
+}
+
+.common_form {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-item: center;
+    background-color: var(--darkgrey2-color);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.common_form_title {
+    color: #cccccc;
+    font-size: 15px;
+    margin-top: 15px;
+    margin-bottom: 3px;
+}
+
+.common_form_title_first_modifier {
+
+}
+
+.common_form_input_field {
+    color: white;
+    background-color: var(--semi-darkgrey-color);
+    border-radius: 5px;
+    border-style: none;
+    padding: 5px 5px 5px 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.common_form__common_form_name {
+    margin-top: 15px;
+    margin-bottom: 3px;
+}
+
+.common_form_name {
+    color: #cccccc;
+    font-size: 15px;
+}
+
+.common_form__common_form_title {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 15px 0;
+}

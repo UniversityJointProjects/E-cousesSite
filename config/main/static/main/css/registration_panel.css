@@ -1,0 +1,181 @@
+.button1_padding {
+    padding: 5px 20px 5px 20px
+}
+
+.username_container__button1_modifier {
+    background-color: var(--darkgrey-color);
+    cursor: default;
+    color: white;
+}
+
+.username_container__button1_modifier:hover {
+    color: white;
+}
+
+.role_container__button1_modifier {
+    background-color: var(--magenta-color);
+    cursor: default;
+}
+
+.username_container__username_title {
+    margin: 0 0 5px 0;
+}
+
+.role_container__role_title {
+    margin: 0 0 5px 0;
+}
+
+.username_title, .role_title{
+    text-align: center;
+    font-size: 13px;
+    color: var(--dark-white9-color);
+}
+
+.username, .role {
+    padding: 5px 20px 5px 20px;
+    border-radius: 10px;
+    background-color: #ea337b;
+    //background-color: #26e189;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    border-style: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.role {
+    color: black;
+}
+
+.role:hover {
+    color: black;
+    text-decoration: none;
+    background-color: #cc2d6d;
+}
+
+.username {
+    background-color: #333333;
+    color: white    ;
+}
+
+.username:hover {
+    background-color: #2b2b2b;
+    color: white;
+    text-decoration: none;
+}
+
+.username_container, .role_container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 15px 0 0;
+}
+
+.role_container {
+    margin-right: 0;
+}
+
+.logout_button_container {
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+}
+
+.user_info_vert_line_container {
+    margin: 0 30px 0 30px;
+    padding-top: 40px;
+    padding-bottom: 5px;
+}
+
+.user_info_vert_line {
+    height: 100%;
+    border-left: 1px solid grey;
+}
+
+.log_in_and_register__button1 {
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.registration_panel {
+    display: flex;
+    justify-content: right;
+    align-items: top;
+}
+
+.log_in_and_register {
+    margin-right: 20px;
+    display:flex;
+    align-items: top;
+}
+
+.reg_buttons {
+    color: black;
+    text-decoration: none;
+    padding: 5px 15px 5px 15px;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.log_in {
+    background-color: #ea337b;
+}
+
+.log_in:hover {
+    color: black;
+    background-color:#eb0071;
+}
+
+.log_in:active {
+    background-color: #bf025d;
+    color: black;
+}
+
+.register {
+    //background-color: #5bc4d1;
+    background-color: #75fbf6;
+}
+
+.register:hover {
+    color: black;
+    background-color: #02e3dc;
+}
+
+.register:active {
+    color: black;
+    background-color: #00bfb9;
+}
+
+.registration_title {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 15px 0;
+}
+
+.register_button {
+    padding: 5px 80px 5px 80px;
+    border-radius: 10px;
+    margin-top: 18px;
+    background-color: #00fff7;
+    //background-color: #26e189;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    border-style: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.login_button {
+    padding: 5px 80px 5px 80px;
+    border-radius: 10px;
+    margin-top: 18px;
+    background-color: #ea337b;
+    //background-color: #26e189;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    border-style: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
