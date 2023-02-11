@@ -139,13 +139,15 @@ def profile(request):
     model = ProfileInfo.objects.filter(login=user)[0]
 
     if request.method == 'POST':
-        form = ProfileInfoForm.clone(request.POST)
-        print(form.errors)
+        # form = ProfileInfoForm.clone(request.POST)
+        form = ProfileInfoForm.clone({"name": request.POST["name"], "surname": request.POST["surname"],
+                                      "city": request.POST["city"], "email": request.POST["email"],
+                                      "bio": request.POST["bio"],  "avatar": request.POST["file"]})
         if form.is_valid():
             editing_model = ProfileInfo.objects.filter(login=user)[0]
             for field in form._meta.fields:
                 setattr(editing_model, field, form.cleaned_data.get(field))
-        #editing_model.save()
+            editing_model.save()
 
     return render(request, 'main/profile.html', {'name': model.name,
                                                  'surname': model.surname,
