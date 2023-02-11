@@ -1,6 +1,7 @@
 import datetime as datetime
 from django.db import models
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 
 
 class ShopQuality(models.Model):
@@ -122,8 +123,11 @@ class Check(models.Model):
 class Course(models.Model):
 
     title = models.CharField('Title', max_length=250)
+    course_image = models.ImageField('Course image', upload_to="photo_files", null=True, blank=True)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField('Date', default=datetime.date(1, 1, 1))
     time_to_read = models.CharField('Time to read', max_length=50)
+    description = models.CharField('Description', max_length=500)
     content = RichTextField(blank=True, null=True)
 
     def __str__(self):

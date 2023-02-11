@@ -141,3 +141,10 @@ def course_change_view(request, command, course_id):
             error = 'Вы ввели некорректные данные*'
 
     return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error})
+
+
+def all_courses_view(request):
+    courses = Course.objects.all()
+    return render(request, 'main/all_courses.html', {'courses': courses})
+
+

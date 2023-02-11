@@ -182,7 +182,8 @@ class CreateUserForm(UserCreationForm):
 class CourseForm(ModelForm):
     class Meta:
         model = Course
-        fields = ['title', 'date', 'time_to_read', 'content']
+        fields = ['title', 'course_image', 'author_id', 'date', 'time_to_read', 'description', 'content']
+
         widgets = {
             "title": forms.TextInput(
                 attrs={'class': 'common_form_input_field',

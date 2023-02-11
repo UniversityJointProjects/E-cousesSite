@@ -1,12 +1,23 @@
+:root {
+    --navigation-width: 330px;
+}
+
+.sidebar_placeholder {
+    float: left;
+    width: var(--navigation-width);
+    height: 100%;
+}
 
 .navigation_sidebar {
     float: left;
+    position: fixed;
     background: #181818;
-    width: 330px;
+    width: var(--navigation-width);
     padding: 2.5%;
-    height: 100vh;
+    height: 100%;
     color: #fff;
     border-right: 2px solid #4d4d4d;
+
 }
 
 .navigation_sidebar__navigation_list {
