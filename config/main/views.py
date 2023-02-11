@@ -136,23 +136,20 @@ def login_view(request):
 
 def profile(request):
     user = request.user
-
-    form = ProfileInfoForm.clone(request.POST)
-    editing_model = ProfileInfo.objects.filter(login=user)[0]
-
-    for field in form._meta.fields:
-        setattr(editing_model, field, form.cleaned_data.get(field))
+    model = ProfileInfo.objects.filter(login=user)[0]
 
     if request.method == 'POST':
-        form = ProfileInfoForm.clone_instance(ProfileInfo.objects.filter(login=user)[0])
-
+        form = ProfileInfoForm.clone(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            editing_model = ProfileInfo.objects.filter(login=user)[0]
+            for field in form._meta.fields:
+                setattr(editing_model, field, form.cleaned_data.get(field))
         #editing_model.save()
-        # if form.is_valid():
-        # form.save()
-        # print(str(form))
-    return render(request, 'main/profile.html', {'name': name,
-                                                 'surname': surname,
-                                                 'city': city,
-                                                 'email': email,
-                                                 'bio': bio,
-                                                 'avatar': avatar})
+
+    return render(request, 'main/profile.html', {'name': model.name,
+                                                 'surname': model.surname,
+                                                 'city': model.city,
+                                                 'email': model.email,
+                                                 'bio': model.bio,
+                                                 'avatar': model.avatar})

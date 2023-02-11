@@ -25,25 +25,25 @@
                 <div class="profile_form">
                     <div>
                         <div>Имя</div>
-                        <div class="input_fields"> <input type="text" name="name" placeholder="Введите имя..." class="common_form_input_field"> </div>
+                        <div class="input_fields"> <input type="text" name="name" placeholder="Введите имя..." class="common_form_input_field" value="{{name}}"> </div>
                         <div class="text_fields">Фамилия</div>
-                        <div class="input_fields"> <input type="text" name="surname" placeholder="Введите фамилию..." class="common_form_input_field" ></div>
+                        <div class="input_fields"> <input type="text" name="surname" placeholder="Введите фамилию..." class="common_form_input_field" value="{{surname}}"></div>
                     </div>
 
                     <div>
                         <div>Город</div>
-                        <div class="input_fields"> <input type="text" name="city" placeholder="Введите город..." class="common_form_input_field" ></div>
+                        <div class="input_fields"> <input type="text" name="city" placeholder="Введите город..." class="common_form_input_field" value="{{city}}"></div>
                         <div class="text_fields">Email</div>
-                        <div class="input_fields"> <input type="email" name="email" placeholder="Введите email..." class="common_form_input_field" ></div>
+                        <div class="input_fields"> <input type="email" name="email" placeholder="Введите email..." class="common_form_input_field" value="{{email}}"></div>
                     </div>
 
                     <div>
                         <div>Информация о себе</div>
-                        <div class="input_fields"> <textarea rows="5" cols="33" name="bio" placeholder="Расскажите о себе..." class="common_form_input_field bio_textarea_size" ></textarea></div>
+                        <div class="input_fields"> <textarea rows="5" cols="33" name="bio" placeholder="Расскажите о себе..." class="common_form_input_field bio_textarea_size">{{bio}}</textarea></div>
                     </div>
 
                     <div class="input_avatar_image">
-                        <img class="avatar_image" src="static/main/img/dummy_avatar.svg">
+                        <img class="avatar_image" src="{{avatar}}">
                         <label class="input-file">
                             <input type="file" name="file">
                             <span>Изменить</span>

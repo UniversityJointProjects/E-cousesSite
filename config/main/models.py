@@ -156,4 +156,4 @@ class ProfileInfo(models.Model):
     city = models.CharField("City", max_length=50)
     email = models.EmailField("Email", max_length=50)
     bio = models.CharField("Bio", max_length=300)
-    avatar = models.ImageField("Avatar")
+    avatar = models.ImageField("Avatar", upload_to='photo_files')
