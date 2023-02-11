@@ -177,3 +177,18 @@ class CreateUserForm(UserCreationForm):
                 attrs={'class': 'common_form_input_field',
                        'placeholder': 'Repeat the password...'}),
         }
+
+
+class CreateAnnouncementForm(ModelForm):
+    class Meta:
+        model = Announcement
+        fields = ['title', "date", "author", 'text']
+
+        widgets = {
+            "title": forms.TextInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите заголовок...'}),
+            "text": forms.Textarea(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите текст...'}),
+        }

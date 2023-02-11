@@ -1,0 +1,32 @@
+{% load static %}
+{% load l10n %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Создать объявление</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/logo.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'main/css/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/announcements_create.css'%}">
+</head>
+<body>
+    {% include 'main/navigation.html' %}
+    <div class="announcement_form_container">
+        <h1 class="announcements_text_title">Создать объявление</h1>
+        <form class="common_form" method="post">
+            {% csrf_token %}
+            <label id="title_label">Заголовок объявления</label>
+            {{form.title}}
+            <label id="text_label">Текст объявления</label>
+            {{form.text}}
+            
+            <p class = "error_notification">{{ error }}</p>
+            <button class="button1 button1_padding green-button announcement_form__button1" type="submit">Опубликовать</button>
+        </form>
+    </div>
+</body>
+</html>

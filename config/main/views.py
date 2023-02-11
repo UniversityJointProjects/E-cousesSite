@@ -38,6 +38,20 @@ def announcements(request):
     return render(request, "main/announcements.html", {'role': role, "announcements": data})
 
 
+def announcements_create(request):
+    role = get_role(request.user)
+    form = CreateAnnouncementForm
+
+    if request.method == "POST":
+        caform = CreateAnnouncementForm({"title": request.POST["title"], "date": datetime.date.today(), "author": request.user, "text": request.POST["text"]})
+
+        if caform.is_valid():
+            caform.save()
+            return redirect('announcements')
+
+    return render(request, "main/announcements_create.html", {'role': role, "form": form})
+
+
 
 def change_table(request, url_table_id, entry_id, command):
     forms = [ShopQualityForm, ShopForm, DirectorForm, FirmForm, ProductForm, CheckForm]
