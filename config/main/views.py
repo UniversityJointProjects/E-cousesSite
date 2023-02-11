@@ -107,6 +107,7 @@ def registration(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            # TODO не отправляет логин!
             user_info_form = ProfileInfoForm({"login": request.POST.get("username"), "name": "",
                                               "surname": "", "city": "", "email": "", "bio": "", "avatar": ""})
             user_info_form.save()
@@ -141,27 +142,28 @@ def profile(request):
 
     if request.method == 'POST':
         form = ProfileInfoForm(request.POST, request.FILES)
+        form_without_avatar = ProfileInfoFormWithoutAvatar(request.POST)
 
         # form = ProfileInfoForm.clone({"name": request.POST["name"], "surname": request.POST["surname"],
         #                              "city": request.POST["city"], "email": request.POST["email"],
         #                              "bio": request.POST["bio"],  "avatar": request.POST["avatar"]})
         if form.is_valid():
             editing_model = ProfileInfo.objects.filter(login=user)[0]
-            print(str(editing_model))
-            print("YEP")
-            # setattr(editing_model, editing_model.name, form['name'].value())
-            # setattr(editing_model, editing_model.surname, form['surname'].value())
-            # setattr(editing_model, editing_model.city, form['city'].value())
-            # setattr(editing_model, editing_model.email, form['email'].value())
-            # setattr(editing_model, editing_model.bio, form['bio'].value())
+            # print(str(editing_model))
+            # print("YEP")
+
             # if request.FILES:
             #    setattr(editing_model, editing_model.avatar, form['avatar'].value())
+            try:
+                ProfileInfo(avatar=request.FILES['avatar'])  # TODO КОСТЫЛЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                for field in form._meta.fields:
+                    setattr(editing_model, field, form.cleaned_data.get(field))
+            except:
+                for field in form_without_avatar._meta.fields:
+                    setattr(editing_model, field, form.cleaned_data.get(field))
 
-            # TODO добавить проверку на загрузку фотки
-
-            for field in form._meta.fields:
-                setattr(editing_model, field, form.cleaned_data.get(field))
             editing_model.save()
+
             return redirect('/profile')
     else:
         form = ProfileInfoForm()

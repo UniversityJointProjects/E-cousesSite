@@ -180,15 +180,6 @@ class CreateUserForm(UserCreationForm):
 
 
 class ProfileInfoForm(ModelForm):
-
-    @staticmethod
-    def clone(request):
-        return ProfileInfoForm(request)
-
-    @staticmethod
-    def clone_instance(ins):
-        return ProfileInfoForm(instance=ins)
-
     class Meta:
         model = ProfileInfo
         fields = ['name', 'surname', 'city', 'email', 'bio', 'avatar']
@@ -199,3 +190,15 @@ class ProfileInfoForm(ModelForm):
     email = forms.EmailField(required=False)
     bio = forms.CharField(required=False)
     avatar = forms.ImageField(required=False)
+
+
+class ProfileInfoFormWithoutAvatar(ModelForm):
+    class Meta:
+        model = ProfileInfo
+        fields = ['name', 'surname', 'city', 'email', 'bio']
+
+    name = forms.CharField(required=False)
+    surname = forms.CharField(required=False)
+    city = forms.CharField(required=False)
+    email = forms.EmailField(required=False)
+    bio = forms.CharField(required=False)
