@@ -54,20 +54,12 @@
     width: 154px;
 }
 
-.profile_form {
-    display: flex;
-    justify-content: space-between;
-}
 
 .button_submit {
     margin-top: 10px;
     margin-right: 20px;
     display:flex;
     justify-content: right;
-}
-
-.bio_textarea_size {
-
 }
 
 
@@ -130,5 +122,17 @@
 
 
 
+.profile_form {
+    display: flex;
+    justify-content: space-between;
+}
 
+.forma {
+    display: flex;
+    justify-content: space-between;
+}
+
+.test {
+    display:flex;flex-direction: column;
+}
 

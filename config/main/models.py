@@ -143,3 +143,17 @@ class Announcement(models.Model):
     date = models.DateField("Date")
     author = models.CharField("Author", max_length=50)
     text = models.TextField("Text")
+
+
+class ProfileInfo(models.Model):
+    class Meta:
+        verbose_name = "Профиль"
+        verbose_name_plural = "Профили"
+
+    login = models.CharField("Login", max_length=150)
+    name = models.CharField("Name", max_length=50)
+    surname = models.CharField("Surname", max_length=50)
+    city = models.CharField("City", max_length=50)
+    email = models.EmailField("Email", max_length=50)
+    bio = models.CharField("Bio", max_length=300)
+    avatar = models.ImageField("Avatar")

@@ -38,7 +38,6 @@ def announcements(request):
     return render(request, "main/announcements.html", {'role': role, "announcements": data})
 
 
-
 def change_table(request, url_table_id, entry_id, command):
     forms = [ShopQualityForm, ShopForm, DirectorForm, FirmForm, ProductForm, CheckForm]
     existing_models = [ShopQuality, Shop, Director, Firm, Product, Check]
@@ -107,6 +106,10 @@ def registration(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            user_info_form = ProfileInfoForm({"login": request.POST["username"], "name": "",
+                                              "surname": "", "city": "", "email": "", "bio": "", "avatar": ""})
+            user_info_form.save()
+
             form.save()
             Group.objects.get(name="client").user_set.add(User.objects.last())
             return redirect('login_view')
@@ -132,4 +135,24 @@ def login_view(request):
 
 
 def profile(request):
-    return render(request, 'main/profile.html', {})
+    user = request.user
+
+    form = ProfileInfoForm.clone(request.POST)
+    editing_model = ProfileInfo.objects.filter(login=user)[0]
+
+    for field in form._meta.fields:
+        setattr(editing_model, field, form.cleaned_data.get(field))
+
+    if request.method == 'POST':
+        form = ProfileInfoForm.clone_instance(ProfileInfo.objects.filter(login=user)[0])
+
+        #editing_model.save()
+        # if form.is_valid():
+        # form.save()
+        # print(str(form))
+    return render(request, 'main/profile.html', {'name': name,
+                                                 'surname': surname,
+                                                 'city': city,
+                                                 'email': email,
+                                                 'bio': bio,
+                                                 'avatar': avatar})
