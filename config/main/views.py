@@ -1,4 +1,5 @@
 from django.contrib.auth.models import Group
+from django.core.files.storage import default_storage
 
 from .forms import *
 from django.shortcuts import render, redirect
@@ -106,7 +107,7 @@ def registration(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            user_info_form = ProfileInfoForm({"login": request.POST["username"], "name": "",
+            user_info_form = ProfileInfoForm({"login": request.POST.get("username"), "name": "",
                                               "surname": "", "city": "", "email": "", "bio": "", "avatar": ""})
             user_info_form.save()
 
@@ -139,19 +140,36 @@ def profile(request):
     model = ProfileInfo.objects.filter(login=user)[0]
 
     if request.method == 'POST':
-        # form = ProfileInfoForm.clone(request.POST)
-        form = ProfileInfoForm.clone({"name": request.POST["name"], "surname": request.POST["surname"],
-                                      "city": request.POST["city"], "email": request.POST["email"],
-                                      "bio": request.POST["bio"],  "avatar": request.POST["file"]})
+        form = ProfileInfoForm(request.POST, request.FILES)
+
+        # form = ProfileInfoForm.clone({"name": request.POST["name"], "surname": request.POST["surname"],
+        #                              "city": request.POST["city"], "email": request.POST["email"],
+        #                              "bio": request.POST["bio"],  "avatar": request.POST["avatar"]})
         if form.is_valid():
             editing_model = ProfileInfo.objects.filter(login=user)[0]
+            print(str(editing_model))
+            print("YEP")
+            # setattr(editing_model, editing_model.name, form['name'].value())
+            # setattr(editing_model, editing_model.surname, form['surname'].value())
+            # setattr(editing_model, editing_model.city, form['city'].value())
+            # setattr(editing_model, editing_model.email, form['email'].value())
+            # setattr(editing_model, editing_model.bio, form['bio'].value())
+            # if request.FILES:
+            #    setattr(editing_model, editing_model.avatar, form['avatar'].value())
+
+            # TODO добавить проверку на загрузку фотки
+
             for field in form._meta.fields:
                 setattr(editing_model, field, form.cleaned_data.get(field))
             editing_model.save()
+            return redirect('/profile')
+    else:
+        form = ProfileInfoForm()
 
     return render(request, 'main/profile.html', {'name': model.name,
                                                  'surname': model.surname,
                                                  'city': model.city,
                                                  'email': model.email,
                                                  'bio': model.bio,
-                                                 'avatar': model.avatar})
+                                                 'avatar': model.avatar,
+                                                 'form': form})

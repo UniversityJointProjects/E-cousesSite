@@ -20,7 +20,7 @@
             Личный кабинет
         </h1>
         <div class="common_form up_container">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="profile_form">
                     <div>
@@ -45,7 +45,7 @@
                     <div class="input_avatar_image">
                         <img class="avatar_image" src="media/{{avatar}}">
                         <label class="input-file">
-                            <input type="file" name="file">
+                            <input type="file" name="avatar">
                             <span>Изменить</span>
                         </label>
                     </div>
