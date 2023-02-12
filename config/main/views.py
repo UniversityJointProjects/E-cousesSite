@@ -141,7 +141,6 @@ def profile(request):
 
     model = ProfileInfo.objects.filter(login=user)[0]
 
-    print(model.course.all()[0].date)
     courses = model.course.all()
 
     if request.method == 'POST':
@@ -215,5 +214,18 @@ def all_courses_view(request):
     courses = Course.objects.all()
     return render(request, 'main/all_courses.html', {'courses': courses})
 
+
 def rich_text_editor(request):
     return render(request, 'main/rich_text_editor.html')
+
+
+def course_subscription_verification(request, course_id, command):
+    user = request.user
+    profile = ProfileInfo.objects.filter(login=user.username)[0]
+
+    if command == 'unsubscribe':
+        profile.course.remove(course_id)
+    elif command == 'subscribe':
+        profile.course.add(course_id)
+
+    return redirect('course', course_id)

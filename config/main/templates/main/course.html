@@ -42,9 +42,9 @@
 
     <div class="course_body">
         {% if isSubscribed %}
-            <div class="leave_button"><button class="button1 button1_padding magenta-button">Отписаться от курса</button></div>
+            <div class="leave_button"><a class="button1 button1_padding magenta-button" href="{% url 'course_subscription_verification' course_id=course.id command='unsubscribe' %}">Отписаться от курса</a></div>
         {% else %}
-            <div class="leave_button"><button class="button1 button1_padding green-button">Подписаться на курс</button></div>
+            <div class="leave_button"><a class="button1 button1_padding green-button" href="{% url 'course_subscription_verification' course_id=course.id command='subscribe' %}">Подписаться на курс</a></div>
         {% endif %}
         <div class="site_path">
             <a class="ref" href="{% url 'all_courses'%}">Все курсы</a> /
