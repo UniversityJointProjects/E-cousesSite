@@ -70,8 +70,8 @@
 
             {% for c in course %}
             <div class="course_info">
-                <a href="/course/{{c.id}}" style=" text-decoration: none; color: white;">
-                <div style="height: 170px;">
+                <a class="link_to_course" href="/course/{{c.id}}">
+                <div class="link_div">
                     <div class="div_course_image"><img class="course_image" src="{{c.course_image.url}}" alt=""></div>
                     <p class="course_text">{{c.title}}</p>
                 </div>
