@@ -1,5 +1,8 @@
 import datetime as datetime
 from django.db import models
+from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
+from tinymce import models as tinymce_models
 
 
 class ShopQuality(models.Model):
@@ -116,6 +119,38 @@ class Check(models.Model):
     class Meta:
         verbose_name = "Check"
         verbose_name_plural = "Checks"
+
+
+class Course(models.Model):
+
+    title = models.CharField('Title', max_length=250)
+    course_image = models.ImageField('Course image', upload_to="photo_files", null=True, blank=True)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField('Date', default=datetime.date(1, 1, 1))
+    time_to_read = models.CharField('Time to read', max_length=50)
+    description = models.CharField('Description', max_length=500)
+    content = RichTextField(blank=True, null=True)
+    #content = tinymce_models.HTMLField()
+
+    def __str__(self):
+        return str(self.title)
+
+    class Meta:
+        verbose_name = "Course"
+        verbose_name_plural = "Courses"
+
+
+class CourseFile(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course_file = models.FileField(upload_to="courses_files")
+    file_name = models.CharField('File name', max_length=100)
+
+    def __str__(self):
+        return str(self.file_name)
+
+    class Meta:
+        verbose_name = "Course file"
+        verbose_name_plural = "Course files"
 
 
 class Article(models.Model):

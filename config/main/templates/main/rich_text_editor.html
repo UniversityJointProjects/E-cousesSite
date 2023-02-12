@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Amnis | Rich text editor</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/logo.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'main/css/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/rich_text_editor.css'%}">
+</head>
+<body>
+    <form>
+        <button type="button" data-cmd="justifyRight">
+            justify right
+        </button>
+        <button type="button" data-cmd="showCode" name="active">
+            show code
+        </button>
+    </form>
+    <iframe id="output" name="textField"></iframe>
+
+    <script>
+        const buttons = document.querySelectorAll('button');
+        textField.document.designMode = "On";
+        for (let i = 0; i < buttons.length; i++)
+        {
+            buttons[i].addEventListener('click', ()=>{
+                let cmd = buttons[i].getAttribute('data-cmd');
+                if (buttons[i].name === "active")
+                {
+                    buttons[i].classList.toggle('active');
+                }
+                textField.document.execCommand(cmd, false, null)
+            })
+        }
+
+    </script>
+</body>
+</html>

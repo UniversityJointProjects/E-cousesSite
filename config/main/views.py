@@ -169,3 +169,36 @@ def profile(request):
                                                  'bio': model.bio,
                                                  'avatar': model.avatar,
                                                  'form': form})
+
+def course_view(request, course_id):
+    courses = Course.objects.all().filter(id=course_id)
+    if len(courses):
+        course = courses[0]
+        course_files = CourseFile.objects.all().filter(course=course)
+        return render(request, 'main/course.html', {'course': course, 'course_files': course_files})
+    else:
+        print('Error. There is no such course to be found.')
+        return redirect('all_courses')
+
+
+def course_change_view(request, command, course_id):
+    course_form = CourseForm()
+
+    error = ''
+    if request.method == 'POST':
+        form = CourseForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('introduce')
+        else:
+            error = 'Вы ввели некорректные данные*'
+
+    return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error})
+
+
+def all_courses_view(request):
+    courses = Course.objects.all()
+    return render(request, 'main/all_courses.html', {'courses': courses})
+
+def rich_text_editor(request):
+    return render(request, 'main/rich_text_editor.html')
