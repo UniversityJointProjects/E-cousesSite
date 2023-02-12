@@ -124,10 +124,11 @@ def login_view(request):
 
 
 def course_view(request, course_id):
-    query_set = Course.objects.all().filter(id=course_id)
-    if len(query_set):
-        course = query_set[0]
-        return render(request, 'main/course.html', {'course': course})
+    courses = Course.objects.all().filter(id=course_id)
+    if len(courses):
+        course = courses[0]
+        course_files = CourseFile.objects.all().filter(course=course)
+        return render(request, 'main/course.html', {'course': course, 'course_files': course_files})
     else:
         print('Error. There is no such course to be found.')
         return redirect('all_courses')
@@ -152,4 +153,5 @@ def all_courses_view(request):
     courses = Course.objects.all()
     return render(request, 'main/all_courses.html', {'courses': courses})
 
-
+def rich_text_editor(request):
+    return render(request, 'main/rich_text_editor.html')

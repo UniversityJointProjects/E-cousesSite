@@ -2,6 +2,7 @@ import datetime as datetime
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
+from tinymce import models as tinymce_models
 
 
 class ShopQuality(models.Model):
@@ -129,13 +130,27 @@ class Course(models.Model):
     time_to_read = models.CharField('Time to read', max_length=50)
     description = models.CharField('Description', max_length=500)
     content = RichTextField(blank=True, null=True)
+    #content = tinymce_models.HTMLField()
 
     def __str__(self):
-        return str(self.id)
+        return str(self.title)
 
     class Meta:
         verbose_name = "Course"
         verbose_name_plural = "Courses"
+
+
+class CourseFile(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course_file = models.FileField(upload_to="courses_files")
+    file_name = models.CharField('File name', max_length=100)
+
+    def __str__(self):
+        return str(self.file_name)
+
+    class Meta:
+        verbose_name = "Course file"
+        verbose_name_plural = "Course files"
 
 
 class Article(models.Model):

@@ -17,15 +17,39 @@
     {% include 'main/navigation.html' %}
     {% include 'main/registration_panel.html' %}
 
+<!--    <div class="course_body">-->
+<!--        <p class="site_path">-->
+<!--            <span class="ref">Все курсы</span> /-->
+<!--            <span>Эпоха Звезд</span>-->
+<!--        </p>-->
+<!--        <h1 class="course_title">Эпоха Звезд</h1>-->
+<!--        <div class="sub_title">-->
+<!--            <div class="author">Spectre</div>-->
+<!--            <div class="split_point">•</div>-->
+<!--            <div class="time_to_pass author_and_time_to_pass__time_to_pass">Feb. 11, 2023</div>-->
+<!--            <div class="split_point">•</div>-->
+<!--            <div class="time_to_pass author_and_time_to_pass__time_to_pass">2 дня на прохождение</div>-->
+<!--        </div>-->
+<!--        <a href="/media/courses_files/wallpapersden.com_elden-ring-hd-age-of-stars_1920x1080.jpg" download>sdf</a><br>-->
+
+<!--        {% for f in course_files %}-->
+<!--            <a href="{{f.course_file.url}}" download>{{f.file_name}}</a><br>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+
     <div class="course_body">
         <p class="site_path">
-            <span class="ref">Learn</span> /
-            <span class="ref">Windows</span> /
-            <span class="ref">Apps</span> /
-            <span class="ref">Win32</span>
+            <span class="ref">Все курсы</span> /
+            <span>{{course.title}}</span>
         </p>
         <h1 class="course_title">{{course.title}}</h1>
-        <p class="course_subtitle course_body__course_subtitle">Article   {{course.date}}   {{course.time_to_read}}   <span class="ref">6 contributors<span></span></p>
+        <div class="sub_title">
+            <div class="author">{{course.author_id.username}}</div>
+            <div class="split_point">•</div>
+            <div class="time_to_pass author_and_time_to_pass__time_to_pass">{{course.date}}</div>
+            <div class="split_point">•</div>
+            <div class="time_to_pass author_and_time_to_pass__time_to_pass">{{course.time_to_read}} на прохождение</div>
+        </div>
         {{course.content|safe}}
     </div>
 </body>

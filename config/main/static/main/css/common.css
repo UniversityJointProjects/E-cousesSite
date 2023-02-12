@@ -27,6 +27,15 @@
     --error-red-color: #ff5757;
 }
 
+html, body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#111111;
+    color: white;
+}
+
 .green-button {
     background-color: var(--add-green-color);
 }
@@ -130,4 +139,8 @@
     width: 100%;
     text-align: center;
     margin: 0 0 15px 0;
+}
+
+.split_point {
+    margin: 0 5px 0 5px;
 }

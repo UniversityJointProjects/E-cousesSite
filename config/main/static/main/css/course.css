@@ -25,3 +25,18 @@ html, body{
 .site_path {
     font-size: 13px;
 }
+
+.author {
+    color: var(--magenta-color);
+}
+
+.sub_title {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: .875rem;
+}
+
+.course_title {
+    margin: 0;
+}

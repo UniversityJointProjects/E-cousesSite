@@ -28,7 +28,10 @@
           </h2>
           <div class="author_and_time_to_pass">
             <p class="author">{{c.author_id.username}}</p>
-            <p class="time_to_pass author_and_time_to_pass__time_to_pass">• {{c.time_to_read}} на прохождение</p>
+            <div class="split_point">•</div>
+            <p class="time_to_pass author_and_time_to_pass__time_to_pass">{{c.date}}</p>
+            <div class="split_point">•</div>
+            <p class="time_to_pass author_and_time_to_pass__time_to_pass">{{c.time_to_read}} на прохождение</p>
           </div>
           <p class="course_desc">
               {{c.description}}

@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout', include('django.contrib.auth.urls'), name='logout'),
     path('course/<int:course_id>', views.course_view, name='course'),
     path('course/course_change/<command>/<int:course_id>', views.course_change_view, name='course_change'),
-    path('course/all_courses', views.all_courses_view, name='all_courses')
+    path('course/all_courses', views.all_courses_view, name='all_courses'),
+    path('rich_text_editor', views.rich_text_editor, name='rich_text_editor')
 ]
