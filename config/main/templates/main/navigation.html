@@ -4,10 +4,12 @@
         <img src="{% static 'main/img/logo.png' %}" alt="logo">
         <span class="logo">Amnis</span>
         <ul class="navigation_list navigation_sidebar__navigation_list">
+            {% if user.is_authenticated %}
             <a class="navigation_list_ref" href="{% url 'profile' %}">
                 <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Личный кабинет</li>
             </a>
             <hr>
+            {% endif %}
             <a class="navigation_list_ref" href="{% url 'introduce' %}">
                 <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Ваши курсы</li>
             </a>

@@ -107,10 +107,7 @@ def registration(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            # TODO не отправляет логин!
-            user_info_form = ProfileInfoForm({"login": request.POST.get("username"), "name": "",
-                                              "surname": "", "city": "", "email": "", "bio": "", "avatar": ""})
-            user_info_form.save()
+            ProfileInfo.objects.create(login=request.POST.get("username"), avatar="avatars/no_avatar.png")
 
             form.save()
             Group.objects.get(name="client").user_set.add(User.objects.last())
@@ -138,24 +135,21 @@ def login_view(request):
 
 def profile(request):
     user = request.user
+
+    if not user.is_authenticated:
+        return redirect('introduce')
+
     model = ProfileInfo.objects.filter(login=user)[0]
 
     if request.method == 'POST':
         form = ProfileInfoForm(request.POST, request.FILES)
         form_without_avatar = ProfileInfoFormWithoutAvatar(request.POST)
 
-        # form = ProfileInfoForm.clone({"name": request.POST["name"], "surname": request.POST["surname"],
-        #                              "city": request.POST["city"], "email": request.POST["email"],
-        #                              "bio": request.POST["bio"],  "avatar": request.POST["avatar"]})
         if form.is_valid():
             editing_model = ProfileInfo.objects.filter(login=user)[0]
-            # print(str(editing_model))
-            # print("YEP")
 
-            # if request.FILES:
-            #    setattr(editing_model, editing_model.avatar, form['avatar'].value())
             try:
-                ProfileInfo(avatar=request.FILES['avatar'])  # TODO КОСТЫЛЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                ProfileInfo(avatar=request.FILES['avatar'])
                 for field in form._meta.fields:
                     setattr(editing_model, field, form.cleaned_data.get(field))
             except:

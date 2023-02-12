@@ -48,10 +48,13 @@
 
 .input_avatar_image {
     position: relative;
+    top: 35px;
 }
 
 .avatar_image {
-    width: 154px;
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
 }
 
 
@@ -65,8 +68,8 @@
 
 .input-file {
     position: absolute;
-    top: 115px;
-    left: 10px;
+    top: 100px;
+    right: 80px;
 	display: inline-block;
 }
 .input-file span {
