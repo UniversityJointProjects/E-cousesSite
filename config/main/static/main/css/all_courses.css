@@ -17,6 +17,7 @@ html, body{
 .course {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 30px;
 }
 
@@ -78,4 +79,21 @@ html, body{
 
 .course_desc {
     font-size: 0.9vw;
+}
+
+.image_and_desc {
+    display: flex;
+}
+
+.course_editing {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: end;
+}
+
+.course_editing__button1_modifier {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
 }

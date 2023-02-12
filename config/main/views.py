@@ -173,10 +173,11 @@ def profile(request):
 
 def course_view(request, course_id):
     courses = Course.objects.all().filter(id=course_id)
+    role = get_role(request.user)
     if len(courses):
         course = courses[0]
         course_files = CourseFile.objects.all().filter(course=course)
-        return render(request, 'main/course.html', {'course': course, 'course_files': course_files})
+        return render(request, 'main/course.html', {'course': course, 'course_files': course_files, 'role': role})
     else:
         print('Error. There is no such course to be found.')
         return redirect('all_courses')
@@ -184,22 +185,42 @@ def course_view(request, course_id):
 
 def course_change_view(request, command, course_id):
     course_form = CourseForm()
+    role = get_role(request.user)
 
     error = ''
     if request.method == 'POST':
         form = CourseForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('introduce')
-        else:
-            error = 'Вы ввели некорректные данные*'
+        if command == 'add':
+            if form.is_valid():
+                form.instance.author_id = request.user
+                form.instance.date = datetime.datetime.now().date()
+                form.save()
+                return redirect('introduce')
+            else:
+                error = 'Вы ввели некорректные данные*'
+        elif command == 'update':
+            updated_course = Course.objects.filter(id=course_id)[0]
+            if form.is_valid():
+                for field in form._meta.fields:
+                    if field != 'author_id' and field != 'date':
+                        setattr(updated_course, field, form.cleaned_data.get(field))
+                updated_course.save()
+                return redirect('course', course_id)
+            else:
+                print('course_change_view. command = update. Form is not valid')
+                redirect('all_courses_view')
 
-    return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error})
+    if command == 'update':
+        updated_course = Course.objects.filter(id=course_id)[0]
+        course_form = CourseForm(instance=updated_course)
+
+    return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error, 'role': role})
 
 
 def all_courses_view(request):
     courses = Course.objects.all()
-    return render(request, 'main/all_courses.html', {'courses': courses})
+    role = get_role(request.user)
+    return render(request, 'main/all_courses.html', {'courses': courses, 'user': request.user, 'role': role})
 
 def rich_text_editor(request):
     return render(request, 'main/rich_text_editor.html')
