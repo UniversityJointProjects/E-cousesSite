@@ -36,14 +36,6 @@ html, body{
     color: white;
 }
 
-html, body{
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background-color:#111111;
-}
-
 .green-button {
     background-color: var(--add-green-color);
 }

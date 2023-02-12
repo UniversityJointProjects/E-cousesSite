@@ -170,6 +170,7 @@ def profile(request):
                                                  'avatar': model.avatar,
                                                  'form': form})
 
+
 def course_view(request, course_id):
     courses = Course.objects.all().filter(id=course_id)
     if len(courses):
