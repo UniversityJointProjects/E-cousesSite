@@ -188,10 +188,19 @@ class CourseForm(ModelForm):
             "title": forms.TextInput(
                 attrs={'class': 'common_form_input_field',
                        'placeholder': 'Введите заголовок...'}),
+            "course_image": forms.FileInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите заголовок...'}),
+            "author_id": forms.Select(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Выберете автора...'}),
             "date": forms.TextInput(
                 attrs={'class': 'common_form_input_field',
                        'placeholder': 'Введите дату...'}),
             "time_to_read": forms.DateInput(
                 attrs={'class': 'common_form_input_field',
-                       'placeholder': 'Введите время для прочтения...'})
+                       'placeholder': 'Введите время для прочтения...'}),
+            "description": forms.DateInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите описание...'})
         }

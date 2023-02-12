@@ -124,8 +124,13 @@ def login_view(request):
 
 
 def course_view(request, course_id):
-    course = Course.objects.all()[0]
-    return render(request, 'main/course.html', {'course': course})
+    query_set = Course.objects.all().filter(id=course_id)
+    if len(query_set):
+        course = query_set[0]
+        return render(request, 'main/course.html', {'course': course})
+    else:
+        print('Error. There is no such course to be found.')
+        return redirect('all_courses')
 
 
 def course_change_view(request, command, course_id):
@@ -133,7 +138,7 @@ def course_change_view(request, command, course_id):
 
     error = ''
     if request.method == 'POST':
-        form = CourseForm(request.POST)
+        form = CourseForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('introduce')

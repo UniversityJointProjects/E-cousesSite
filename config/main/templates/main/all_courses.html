@@ -24,7 +24,7 @@
         </div>
         <div class="course_desc course__course_desc">
           <h2 class="course_title_h">
-            <a class="course_title" href="">{{c.title}}</a>
+            <a class="course_title" href="{% url 'course' course_id=c.id %}">{{c.title}}</a>
           </h2>
           <div class="author_and_time_to_pass">
             <p class="author">{{c.author_id.username}}</p>
