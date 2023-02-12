@@ -2,7 +2,6 @@ import datetime as datetime
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
-from tinymce import models as tinymce_models
 
 
 class ShopQuality(models.Model):
@@ -130,7 +129,6 @@ class Course(models.Model):
     time_to_read = models.CharField('Time to read', max_length=50)
     description = models.CharField('Description', max_length=500)
     content = RichTextField(blank=True, null=True)
-    #content = tinymce_models.HTMLField()
 
     def __str__(self):
         return str(self.title)
