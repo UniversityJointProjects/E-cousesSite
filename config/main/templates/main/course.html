@@ -41,10 +41,17 @@
 <!--    </div>-->
 
     <div class="course_body">
-        <p class="site_path">
+        {% if isSubscribed %}
+            <div class="leave_button"><button class="button1 button1_padding magenta-button">Отписаться от курса</button></div>
+        {% else %}
+            <div class="leave_button"><button class="button1 button1_padding green-button">Подписаться на курс</button></div>
+        {% endif %}
+        <div class="site_path">
             <a class="ref" href="{% url 'all_courses'%}">Все курсы</a> /
             <span>{{course.title}}</span>
-        </p>
+        </div>
+
+
         <h1 class="course_title">{{course.title}}</h1>
         <div class="sub_title">
             <div class="author">{{course.author_id.username}}</div>

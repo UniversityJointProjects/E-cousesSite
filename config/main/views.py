@@ -177,10 +177,20 @@ def profile(request):
 
 def course_view(request, course_id):
     courses = Course.objects.all().filter(id=course_id)
+    isSubscribed = False
+
     if len(courses):
         course = courses[0]
+        profile = ProfileInfo.objects.filter(login=request.user.username)[0]
+
+        if course in profile.course.all():
+            isSubscribed = True
+        else:
+            isSubscribed = False
+
         course_files = CourseFile.objects.all().filter(course=course)
-        return render(request, 'main/course.html', {'course': course, 'course_files': course_files})
+        return render(request, 'main/course.html', {'course': course, 'course_files': course_files,
+                                                    'isSubscribed': isSubscribed})
     else:
         print('Error. There is no such course to be found.')
         return redirect('all_courses')

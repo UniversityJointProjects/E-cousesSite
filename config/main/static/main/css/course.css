@@ -22,7 +22,14 @@ html, body{
     font-size: 13px;
 }
 
+.leave_button {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+}
+
 .site_path {
+    display: flex;
     font-size: 13px;
 }
 
