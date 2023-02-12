@@ -141,6 +141,9 @@ def profile(request):
 
     model = ProfileInfo.objects.filter(login=user)[0]
 
+    print(model.course.all()[0].date)
+    courses = model.course.all()
+
     if request.method == 'POST':
         form = ProfileInfoForm(request.POST, request.FILES)
         form_without_avatar = ProfileInfoFormWithoutAvatar(request.POST)
@@ -168,7 +171,8 @@ def profile(request):
                                                  'email': model.email,
                                                  'bio': model.bio,
                                                  'avatar': model.avatar,
-                                                 'form': form})
+                                                 'form': form,
+                                                 'course': courses})
 
 
 def course_view(request, course_id):
