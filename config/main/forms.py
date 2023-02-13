@@ -27,7 +27,7 @@ class ShopQualityForm(ModelForm):
                        'placeholder': 'Enter ' + ShopQuality.names[2].lower() + '...'}),
             "products_quality": forms.NumberInput(
                 attrs={'class': 'common_form_input_field',
-                       'placeholder': 'Enter ' + ShopQuality.names[3].lower() + '...' })
+                       'placeholder': 'Enter ' + ShopQuality.names[3].lower() + '...'})
         }
 
 
@@ -53,7 +53,7 @@ class ShopForm(ModelForm):
                        'placeholder': 'Enter ' + Shop.names[2].lower() + '...'}),
             "shop_quality_id": forms.Select(
                 attrs={'class': 'common_form_input_field',
-                       'placeholder': 'Enter ' + Shop.names[3].lower() + '...' })
+                       'placeholder': 'Enter ' + Shop.names[3].lower() + '...'})
         }
 
 
@@ -184,6 +184,37 @@ class CreateAnnouncementForm(ModelForm):
         model = Announcement
         fields = ['title', "date", "author", 'text']
 
+
+class ProfileInfoForm(ModelForm):
+    class Meta:
+        model = ProfileInfo
+        fields = ['name', 'surname', 'city', 'email', 'bio', 'avatar']
+
+    name = forms.CharField(required=False)
+    surname = forms.CharField(required=False)
+    city = forms.CharField(required=False)
+    email = forms.EmailField(required=False)
+    bio = forms.CharField(required=False)
+    avatar = forms.ImageField(required=False)
+
+
+class ProfileInfoFormWithoutAvatar(ModelForm):
+    class Meta:
+        model = ProfileInfo
+        fields = ['name', 'surname', 'city', 'email', 'bio']
+
+    name = forms.CharField(required=False)
+    surname = forms.CharField(required=False)
+    city = forms.CharField(required=False)
+    email = forms.EmailField(required=False)
+    bio = forms.CharField(required=False)
+
+
+class CourseForm(ModelForm):
+    class Meta:
+        model = Course
+        fields = ['title', 'course_image', 'author_id', 'date', 'time_to_read', 'description', 'content']
+
         widgets = {
             "title": forms.TextInput(
                 attrs={'class': 'common_form_input_field',
@@ -191,4 +222,19 @@ class CreateAnnouncementForm(ModelForm):
             "text": forms.Textarea(
                 attrs={'class': 'common_form_input_field',
                        'placeholder': 'Введите текст...'}),
+            "course_image": forms.FileInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите заголовок...'}),
+            "author_id": forms.Select(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Выберете автора...'}),
+            "date": forms.TextInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите дату...'}),
+            "time_to_read": forms.DateInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите время для прочтения...'}),
+            "description": forms.DateInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите описание...'})
         }

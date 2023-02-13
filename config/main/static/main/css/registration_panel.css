@@ -6,6 +6,7 @@
     background-color: var(--darkgrey-color);
     cursor: default;
     color: white;
+    text-align: center;
 }
 
 .username_container__button1_modifier:hover {
@@ -15,6 +16,7 @@
 .role_container__button1_modifier {
     background-color: var(--magenta-color);
     cursor: default;
+    text-align: center;
 }
 
 .username_container__username_title {

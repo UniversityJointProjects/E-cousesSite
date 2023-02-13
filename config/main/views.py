@@ -1,4 +1,5 @@
 from django.contrib.auth.models import Group
+from django.core.files.storage import default_storage
 
 from .forms import *
 from django.shortcuts import render, redirect
@@ -11,11 +12,15 @@ def get_role(user):
     template = ""
     if user.is_authenticated:
         if user.is_superuser:
-            template = "Director"
-        elif user.groups.filter(name='director').exists():
-            template = "Director"
-        elif user.groups.filter(name='client').exists():
-            template = "Client"
+            template = "admin"
+        # elif user.groups.filter(name='director').exists():
+        #     template = "Director"
+        # elif user.groups.filter(name='client').exists():
+        #     template = "Client"
+        elif user.groups.filter(name='student').exists():
+            template = "student"
+        elif user.groups.filter(name='author').exists():
+            template = "author"
         else:
             template = "None"
     return template
@@ -128,8 +133,10 @@ def registration(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            ProfileInfo.objects.create(login=request.POST.get("username"), avatar="avatars/no_avatar.png")
+
             form.save()
-            Group.objects.get(name="client").user_set.add(User.objects.last())
+            Group.objects.get(name="student").user_set.add(User.objects.last())
             return redirect('login_view')
 
     return render(request, 'main/registration.html', {'form': form, 'role': role})
@@ -151,3 +158,112 @@ def login_view(request):
             return redirect('introduce')
     return render(request, 'main/login.html', {'role': role})
 
+
+def profile(request):
+    user = request.user
+    users_table = []
+    role = get_role(request.user)
+
+    if not user.is_authenticated:
+        return redirect('introduce')
+
+    for row in ProfileInfo.objects.all():
+        users_table.append(row.get_dict())
+
+    model = ProfileInfo.objects.filter(login=user)[0]
+    all_users = ProfileInfo.objects.all()
+
+    subscribed_courses = model.course.all()
+    created_courses = Course.objects.filter(author_id=user)
+
+    if request.method == 'POST':
+        form = ProfileInfoForm(request.POST, request.FILES)
+        form_without_avatar = ProfileInfoFormWithoutAvatar(request.POST)
+
+        if form.is_valid():
+            editing_model = ProfileInfo.objects.filter(login=user)[0]
+
+            try:
+                ProfileInfo(avatar=request.FILES['avatar'])
+                for field in form._meta.fields:
+                    setattr(editing_model, field, form.cleaned_data.get(field))
+            except:
+                for field in form_without_avatar._meta.fields:
+                    setattr(editing_model, field, form.cleaned_data.get(field))
+
+            editing_model.save()
+
+            return redirect('/profile')
+    else:
+        form = ProfileInfoForm()
+
+    return render(request, 'main/profile.html', {'name': model.name,
+                                                 'surname': model.surname,
+                                                 'city': model.city,
+                                                 'email': model.email,
+                                                 'bio': model.bio,
+                                                 'avatar': model.avatar,
+                                                 'form': form,
+                                                 'subscribed_courses': subscribed_courses,
+                                                 'created_courses': created_courses,
+                                                 'all_users': all_users,
+                                                 'role': role,
+                                                 'users_table': users_table,
+                                                 'users_table_names': ProfileInfo.names})
+
+
+def course_view(request, course_id):
+    courses = Course.objects.all().filter(id=course_id)
+    isSubscribed = False
+
+    if len(courses):
+        course = courses[0]
+        profile = ProfileInfo.objects.filter(login=request.user.username)[0]
+
+        if course in profile.course.all():
+            isSubscribed = True
+        else:
+            isSubscribed = False
+
+        course_files = CourseFile.objects.all().filter(course=course)
+        return render(request, 'main/course.html', {'course': course, 'course_files': course_files,
+                                                    'isSubscribed': isSubscribed})
+    else:
+        print('Error. There is no such course to be found.')
+        return redirect('all_courses')
+
+
+def course_change_view(request, command, course_id):
+    course_form = CourseForm()
+
+    error = ''
+    if request.method == 'POST':
+        form = CourseForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('introduce')
+        else:
+            error = 'Вы ввели некорректные данные*'
+
+    return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error})
+
+
+def all_courses_view(request):
+    courses = Course.objects.all()
+    return render(request, 'main/all_courses.html', {'courses': courses})
+
+
+def rich_text_editor(request):
+    return render(request, 'main/rich_text_editor.html')
+
+
+def course_subscription_verification(request, course_id, command):
+    user = request.user
+    profile = ProfileInfo.objects.filter(login=user.username)[0]
+
+    if command == 'unsubscribe':
+        profile.course.remove(course_id)
+    elif command == 'subscribe':
+        profile.course.add(course_id)
+
+    return redirect('course', course_id)
