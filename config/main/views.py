@@ -52,6 +52,13 @@ def announcements_create(request):
     return render(request, "main/announcements_create.html", {'role': role, "form": form})
 
 
+def timetable(request):
+    role = get_role(request.user)
+
+    return render(request, "main/timetable.html", {'role': role})
+
+
+
 
 def change_table(request, url_table_id, entry_id, command):
     forms = [ShopQualityForm, ShopForm, DirectorForm, FirmForm, ProductForm, CheckForm]
