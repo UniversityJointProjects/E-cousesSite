@@ -183,6 +183,12 @@ class ProfileInfo(models.Model):
         verbose_name = "Профиль"
         verbose_name_plural = "Профили"
 
+    names = ["id", "Логин", "Имя", "Фамилия", "Город", "Email", "BIO", "Фото"]
+
+    def get_dict(self, ):
+        return {'id': self.id, 0: self.login, 1: self.name, 2: self.surname,
+                3: self.city, 4: self.email, 5: self.bio, 6: self.avatar}
+
     login = models.CharField("Login", max_length=150)
     name = models.CharField("Name", max_length=50)
     surname = models.CharField("Surname", max_length=50)

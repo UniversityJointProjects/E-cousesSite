@@ -139,17 +139,20 @@ def login_view(request):
 
 def profile(request):
     user = request.user
+    users_table = []
     role = get_role(request.user)
-    print(role)
 
     if not user.is_authenticated:
         return redirect('introduce')
 
+    for row in ProfileInfo.objects.all():
+        users_table.append(row.get_dict())
+
     model = ProfileInfo.objects.filter(login=user)[0]
+    all_users = ProfileInfo.objects.all()
 
     subscribed_courses = model.course.all()
     created_courses = Course.objects.filter(author_id=user)
-    print(created_courses)
 
     if request.method == 'POST':
         form = ProfileInfoForm(request.POST, request.FILES)
@@ -181,7 +184,10 @@ def profile(request):
                                                  'form': form,
                                                  'subscribed_courses': subscribed_courses,
                                                  'created_courses': created_courses,
-                                                 'role': role})
+                                                 'all_users': all_users,
+                                                 'role': role,
+                                                 'users_table': users_table,
+                                                 'users_table_names': ProfileInfo.names})
 
 
 def course_view(request, course_id):

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'main/css/common.css'%}">
     <link rel="stylesheet" href="{% static 'main/css/profile.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/table_show.css'%}">
 </head>
 <body>
     {% include 'main/navigation.html' %}
@@ -60,7 +61,7 @@
 
 
         {% if role == 'admin' or role == 'author' %}
-        <h3 class="h3_your_courses">
+        <h3 class="heading">
             Список ваших курсов
         </h3>
 
@@ -79,13 +80,7 @@
         {% endif %}
 
 
-
-
-
-
-
-
-        <h3 class="h3_your_courses">
+        <h3 class="heading">
             Список отслеживаемых курсов
         </h3>
 
@@ -106,7 +101,35 @@
 
         </div>
 
+        {% if role == 'admin'%}
+        <h3 class="heading">
+            Список пользователей сайта
+        </h3>
+        <div class="common_form down_container">
 
+
+            <table class="data_table">
+                <tr>
+                    {% for name in users_table_names %}
+                        <th class="table_head">{{name}}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in users_table %}
+                <tr>
+                    {% for key, value in row.items %}
+                        {% if key == 6 %}
+                            <td class="table_data">
+                                <img class="avatar_in_table" src="media/{{value}}" alt="">
+                            </td>
+                        {% else %}
+                            <td class="table_data">{{value}}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
 
 
     </div>
