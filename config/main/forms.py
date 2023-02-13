@@ -215,6 +215,9 @@ class CourseForm(ModelForm):
         model = Course
         fields = ['title', 'course_image', 'author_id', 'date', 'time_to_read', 'description', 'content']
 
+        author_id = forms.ModelChoiceField(queryset=Course.objects.all(), required=False)
+        date = forms.DateField(required=False)
+
         widgets = {
             "title": forms.TextInput(
                 attrs={'class': 'common_form_input_field',

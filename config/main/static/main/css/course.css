@@ -47,3 +47,12 @@ html, body{
 .course_title {
     margin: 0;
 }
+
+.ref {
+    color: var(--magenta-color);
+    text-decoration: none;
+}
+
+.ref:hover {
+    color: var(--magenta-color-hover);
+}

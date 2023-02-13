@@ -47,6 +47,7 @@
             <div class="leave_button"><a class="button1 button1_padding green-button" href="{% url 'course_subscription_verification' course_id=course.id command='subscribe' %}">Подписаться на курс</a></div>
         {% endif %}
         <div class="site_path">
+        <p class="site_path">
             <a class="ref" href="{% url 'all_courses'%}">Все курсы</a> /
             <span>{{course.title}}</span>
         </div>

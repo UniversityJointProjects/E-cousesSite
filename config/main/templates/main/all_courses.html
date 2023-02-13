@@ -19,24 +19,36 @@
     <div class="all_courses_body">
     {% for c in courses %}
       <div class="common_form course">
-        <div class="img_container">
-            <img class="course_image" src="/media/{{ c.course_image }}">
+        <div class="image_and_desc">
+            <div class="img_container">
+                <img class="course_image" src="/media/{{ c.course_image }}">
+            </div>
+            <div class="course_desc course__course_desc">
+              <h2 class="course_title_h">
+                <a class="course_title" href="{% url 'course' course_id=c.id %}">{{c.title}}</a>
+              </h2>
+              <div class="author_and_time_to_pass">
+                <p class="author">{{c.author_id.username}}</p>
+                <div class="split_point">•</div>
+                <p class="time_to_pass author_and_time_to_pass__time_to_pass">{{c.date}}</p>
+                <div class="split_point">•</div>
+                <p class="time_to_pass author_and_time_to_pass__time_to_pass">{{c.time_to_read}} на прохождение</p>
+              </div>
+              <p class="course_desc">
+                  {{c.description}}
+              </p>
+            </div>
         </div>
-        <div class="course_desc course__course_desc">
-          <h2 class="course_title_h">
-            <a class="course_title" href="{% url 'course' course_id=c.id %}">{{c.title}}</a>
-          </h2>
-          <div class="author_and_time_to_pass">
-            <p class="author">{{c.author_id.username}}</p>
-            <div class="split_point">•</div>
-            <p class="time_to_pass author_and_time_to_pass__time_to_pass">{{c.date}}</p>
-            <div class="split_point">•</div>
-            <p class="time_to_pass author_and_time_to_pass__time_to_pass">{{c.time_to_read}} на прохождение</p>
-          </div>
-          <p class="course_desc">
-              {{c.description}}
-          </p>
-        </div>
+        {% if user == c.author_id %}
+            <div class="course_editing">
+                <a href="{% url 'course_change' command='update' course_id=c.id %}" class="button1 buttons_td__button1 course_editing__button1_modifier cyan-button">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
+                <a href="" class="button1 course_editing__button1_modifier magenta-button">
+                    <i class="bi bi-trash3-fill"></i>
+                </a>
+            </div>
+        {% endif %}
       </div>
     {% endfor %}
     </div>
