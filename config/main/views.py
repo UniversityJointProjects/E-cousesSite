@@ -12,11 +12,15 @@ def get_role(user):
     template = ""
     if user.is_authenticated:
         if user.is_superuser:
-            template = "Director"
-        elif user.groups.filter(name='director').exists():
-            template = "Director"
-        elif user.groups.filter(name='client').exists():
-            template = "Client"
+            template = "admin"
+        # elif user.groups.filter(name='director').exists():
+        #     template = "Director"
+        # elif user.groups.filter(name='client').exists():
+        #     template = "Client"
+        elif user.groups.filter(name='student').exists():
+            template = "student"
+        elif user.groups.filter(name='author').exists():
+            template = "author"
         else:
             template = "None"
     return template
@@ -110,7 +114,7 @@ def registration(request):
             ProfileInfo.objects.create(login=request.POST.get("username"), avatar="avatars/no_avatar.png")
 
             form.save()
-            Group.objects.get(name="client").user_set.add(User.objects.last())
+            Group.objects.get(name="student").user_set.add(User.objects.last())
             return redirect('login_view')
 
     return render(request, 'main/registration.html', {'form': form, 'role': role})
@@ -135,13 +139,17 @@ def login_view(request):
 
 def profile(request):
     user = request.user
+    role = get_role(request.user)
+    print(role)
 
     if not user.is_authenticated:
         return redirect('introduce')
 
     model = ProfileInfo.objects.filter(login=user)[0]
 
-    courses = model.course.all()
+    subscribed_courses = model.course.all()
+    created_courses = Course.objects.filter(author_id=user)
+    print(created_courses)
 
     if request.method == 'POST':
         form = ProfileInfoForm(request.POST, request.FILES)
@@ -171,7 +179,9 @@ def profile(request):
                                                  'bio': model.bio,
                                                  'avatar': model.avatar,
                                                  'form': form,
-                                                 'course': courses})
+                                                 'subscribed_courses': subscribed_courses,
+                                                 'created_courses': created_courses,
+                                                 'role': role})
 
 
 def course_view(request, course_id):

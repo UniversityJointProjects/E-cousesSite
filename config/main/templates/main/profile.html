@@ -56,19 +56,43 @@
             </form>
 
 
-
-
-
-
         </div>
+
+
+        {% if role == 'admin' or role == 'author' %}
         <h3 class="h3_your_courses">
             Список ваших курсов
+        </h3>
+
+        <div class="common_form down_container">
+            {% for c in created_courses %}
+            <div class="course_info">
+                <a class="link_to_course" href="/course/{{c.id}}">
+                <div class="link_div">
+                    <div class="div_course_image"><img class="course_image" src="{{c.course_image.url}}" alt=""></div>
+                    <p class="course_text">{{c.title}}</p>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+
+
+
+
+
+
+        <h3 class="h3_your_courses">
+            Список отслеживаемых курсов
         </h3>
 
 
         <div class="common_form down_container">
 
-            {% for c in course %}
+            {% for c in subscribed_courses %}
             <div class="course_info">
                 <a class="link_to_course" href="/course/{{c.id}}">
                 <div class="link_div">
