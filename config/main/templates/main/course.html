@@ -41,10 +41,12 @@
 <!--    </div>-->
 
     <div class="course_body">
-        {% if isSubscribed %}
-            <div class="leave_button"><a class="button1 button1_padding magenta-button" href="{% url 'course_subscription_verification' course_id=course.id command='unsubscribe' %}">Отписаться от курса</a></div>
-        {% else %}
-            <div class="leave_button"><a class="button1 button1_padding green-button" href="{% url 'course_subscription_verification' course_id=course.id command='subscribe' %}">Подписаться на курс</a></div>
+        {% if user.is_authenticated %}
+            {% if isSubscribed %}
+                <div class="leave_button"><a class="button1 button1_padding magenta-button" href="{% url 'course_subscription_verification' course_id=course.id command='unsubscribe' %}">Отписаться от курса</a></div>
+            {% else %}
+                <div class="leave_button"><a class="button1 button1_padding green-button" href="{% url 'course_subscription_verification' course_id=course.id command='subscribe' %}">Подписаться на курс</a></div>
+            {% endif %}
         {% endif %}
         <div class="site_path">
         <p class="site_path">
