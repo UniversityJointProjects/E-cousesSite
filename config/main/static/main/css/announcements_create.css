@@ -8,14 +8,8 @@ body {
 }
 
 .announcement_form_container {
-    margin: 0 auto;
     display:flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    height: 100%;
-    width: 50%;
-    padding:64px;
 }
 
 .announcement_form__button1 {
@@ -42,4 +36,21 @@ label {
 
 .common_form {
     width:100%;
+    align-items: flex-start;
+}
+
+.common_form input, .common_form textarea {
+    width: 100%
+}
+
+.common_form_name {
+    margin: 0;
+}
+
+.common_form_name ~ .common_form_name {
+    margin-top: 24px;
+}
+
+.aside_container {
+    width: 100%;
 }

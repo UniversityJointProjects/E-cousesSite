@@ -15,7 +15,6 @@
 </head>
 <body>
     {% include 'main/navigation.html' %}
-    {% include 'main/registration_panel.html' %}
 
 <!--    <div class="course_body">-->
 <!--        <p class="site_path">-->
@@ -40,28 +39,31 @@
 <!--        {% endfor %}-->
 <!--    </div>-->
 
-    <div class="course_body">
-        {% if isSubscribed %}
-            <div class="leave_button"><a class="button1 button1_padding magenta-button" href="{% url 'course_subscription_verification' course_id=course.id command='unsubscribe' %}">Отписаться от курса</a></div>
-        {% else %}
-            <div class="leave_button"><a class="button1 button1_padding green-button" href="{% url 'course_subscription_verification' course_id=course.id command='subscribe' %}">Подписаться на курс</a></div>
-        {% endif %}
-        <div class="site_path">
-        <p class="site_path">
-            <a class="ref" href="{% url 'all_courses'%}">Все курсы</a> /
-            <span>{{course.title}}</span>
-        </div>
+    <div class="aside_container">
+        <div class="course_body">
+            <div class="site_path">
+            <p class="site_path">
+                <a class="ref" href="{% url 'all_courses'%}">Все курсы</a> &nbsp;/&nbsp;
+                <span>{{course.title}}</span>
+            </div>
 
-
-        <h1 class="course_title">{{course.title}}</h1>
-        <div class="sub_title">
-            <div class="author">{{course.author_id.username}}</div>
-            <div class="split_point">•</div>
-            <div class="time_to_pass author_and_time_to_pass__time_to_pass">{{course.date}}</div>
-            <div class="split_point">•</div>
-            <div class="time_to_pass author_and_time_to_pass__time_to_pass">{{course.time_to_read}} на прохождение</div>
+            <div id="course_title_and_action_button">
+                <h1 class="course_title">{{course.title}}</h1>
+                {% if isSubscribed %}
+                    <div class="leave_button"><a class="button1 button1_padding magenta-button" href="{% url 'course_subscription_verification' course_id=course.id command='unsubscribe' %}">Отписаться от курса</a></div>
+                {% else %}
+                    <div class="leave_button"><a class="button1 button1_padding green-button" href="{% url 'course_subscription_verification' course_id=course.id command='subscribe' %}">Подписаться на курс</a></div>
+                {% endif %}
+            </div>
+            <div class="sub_title">
+                <div class="author">{{course.author_id.username}}</div>
+                <div class="split_point">•</div>
+                <div class="time_to_pass author_and_time_to_pass__time_to_pass">{{course.date}}</div>
+                <div class="split_point">•</div>
+                <div class="time_to_pass author_and_time_to_pass__time_to_pass">{{course.time_to_read}} на прохождение</div>
+            </div>
+            {{course.content|safe}}
         </div>
-        {{course.content|safe}}
     </div>
 </body>
 </html>

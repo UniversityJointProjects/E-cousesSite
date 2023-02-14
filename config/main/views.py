@@ -26,6 +26,15 @@ def get_role(user):
     return template
 
 
+def get_ava(user):
+    if user.is_authenticated:
+        profiles_ava = ProfileInfo.objects.filter(name=user).get().avatar
+
+        return profiles_ava
+    else:
+        return ""
+
+
 # def index(request):
 #     checks = Check.objects.all()
 #     return render(request, "main/index.html", {'checks': checks})
@@ -33,18 +42,27 @@ def get_role(user):
 
 def introduce(request):
     role = get_role(request.user)
-    return render(request, "main/introduce.html", {'role': role})
+    ava = get_ava(request.user)
+
+    return render(request, "main/introduce.html", {'role': role, 'ava': ava})
 
 
 def announcements(request):
     role = get_role(request.user)
-    data = reversed(Announcement.objects.all())
+    ava = get_ava(request.user)
+    profiles = ProfileInfo.objects.all()
+    data = Announcement.objects.all()
+    new_data = []
 
-    return render(request, "main/announcements.html", {'role': role, "announcements": data})
+    for item in data:
+        new_data.append({"title": item.title, "author": item.author, "text": item.text, "date": item.date, "avatar_url": f"media/{profiles.filter(name=item.author).get().avatar}"})
+
+    return render(request, "main/announcements.html", {'role': role, 'ava': ava, "announcements": new_data})
 
 
 def announcements_create(request):
     role = get_role(request.user)
+    ava = get_ava(request.user)
     form = CreateAnnouncementForm
 
     if request.method == "POST":
@@ -54,13 +72,14 @@ def announcements_create(request):
             caform.save()
             return redirect('announcements')
 
-    return render(request, "main/announcements_create.html", {'role': role, "form": form})
+    return render(request, "main/announcements_create.html", {'role': role, 'ava': ava, "form": form})
 
 
 def timetable(request):
     role = get_role(request.user)
+    ava = get_ava(request.user)
 
-    return render(request, "main/timetable.html", {'role': role})
+    return render(request, "main/timetable.html", {'role': role, 'ava': ava})
 
 
 
@@ -70,6 +89,7 @@ def change_table(request, url_table_id, entry_id, command):
     existing_models = [ShopQuality, Shop, Director, Firm, Product, Check]
     form = forms[url_table_id]
     role = get_role(request.user)
+    ava = get_ava(request.user)
 
     if url_table_id in locked_tables and (role != "Director"):
         return redirect('/introduce')
@@ -100,7 +120,7 @@ def change_table(request, url_table_id, entry_id, command):
         'form': form,
         'names': existing_models[url_table_id].names,
         'error': error,
-        'role': role})
+        'role': role, 'ava': ava})
 
 
 def table_view(request, tk):
@@ -108,6 +128,7 @@ def table_view(request, tk):
     existing_models = [ShopQuality, Shop, Director, Firm, Product, Check]
     current_model = existing_models[tk]
     role = get_role(request.user)
+    ava = get_ava(request.user)
 
     if tk in locked_tables and (role != "Director"):
         return redirect('/introduce')
@@ -121,12 +142,14 @@ def table_view(request, tk):
         'table_id': tk,
         'title': current_model.title,
         'user': request.user,
-        'role': role})
+        'role': role, 'ava': ava})
 
 
 def registration(request):
     form = CreateUserForm
     role = get_role(request.user)
+    ava = get_ava(request.user)
+
     if request.user.is_authenticated:
         return redirect('introduce')
 
@@ -139,11 +162,12 @@ def registration(request):
             Group.objects.get(name="student").user_set.add(User.objects.last())
             return redirect('login_view')
 
-    return render(request, 'main/registration.html', {'form': form, 'role': role})
+    return render(request, 'main/registration.html', {'form': form, 'ava': ava, 'role': role})
 
 
 def login_view(request):
     role = get_role(request.user)
+    ava = get_ava(request.user)
 
     if request.user.is_authenticated:
         return redirect('introduce')
@@ -156,13 +180,14 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return redirect('introduce')
-    return render(request, 'main/login.html', {'role': role})
+    return render(request, 'main/login.html', {'role': role, 'ava': ava})
 
 
 def profile(request):
     user = request.user
     users_table = []
     role = get_role(request.user)
+    ava = get_ava(request.user)
 
     if not user.is_authenticated:
         return redirect('introduce')
@@ -207,7 +232,7 @@ def profile(request):
                                                  'subscribed_courses': subscribed_courses,
                                                  'created_courses': created_courses,
                                                  'all_users': all_users,
-                                                 'role': role,
+                                                 'role': role, 'ava': ava,
                                                  'users_table': users_table,
                                                  'users_table_names': ProfileInfo.names})
 
@@ -217,6 +242,8 @@ def course_view(request, course_id):
     isSubscribed = False
 
     role = get_role(request.user)
+    ava = get_ava(request.user)
+    
     if len(courses):
         course = courses[0]
         profile = ProfileInfo.objects.filter(login=request.user.username)[0]
@@ -228,7 +255,7 @@ def course_view(request, course_id):
 
         course_files = CourseFile.objects.all().filter(course=course)
 
-        return render(request, 'main/course.html', {'course': course, 'course_files': course_files, 'role': role, 'isSubscribed': isSubscribed})
+        return render(request, 'main/course.html', {'course': course, 'course_files': course_files, 'role': role, 'ava': ava, 'isSubscribed': isSubscribed})
     else:
         print('Error. There is no such course to be found.')
         return redirect('all_courses')
@@ -237,6 +264,7 @@ def course_view(request, course_id):
 def course_change_view(request, command, course_id):
     course_form = CourseForm()
     role = get_role(request.user)
+    ava = get_ava(request.user)
 
     error = ''
     if request.method == 'POST':
@@ -265,13 +293,15 @@ def course_change_view(request, command, course_id):
         updated_course = Course.objects.filter(id=course_id)[0]
         course_form = CourseForm(instance=updated_course)
 
-    return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error, 'role': role})
+    return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error, 'role': role, 'ava': ava})
 
 
 def all_courses_view(request):
     courses = Course.objects.all()
     role = get_role(request.user)
-    return render(request, 'main/all_courses.html', {'courses': courses, 'user': request.user, 'role': role})
+    ava = get_ava(request.user)
+
+    return render(request, 'main/all_courses.html', {'courses': courses, 'user': request.user, 'role': role, 'ava': ava})
 
 
 def rich_text_editor(request):

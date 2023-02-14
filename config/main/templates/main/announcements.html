@@ -15,37 +15,36 @@
 </head>
 <body>
     {% include 'main/navigation.html' %}
-    <div class="registration_panel">
-        {% include 'main/registration_panel.html' %}
-    </div>
-    <div class="announcements_container main_section__announcements_container">
-        <h1 class="announcements_text_title">Объявления</h1>
-        {% for announcement in announcements %}
-            <div class="announcements announcements_container__announcements">
-                <div class="announcements_header">
-                    <div class="announcements_avatar">
-                        <img src="static/main/img/dummy_avatar.svg">
-                    </div>
-                    <div class="announcements_preview">
-                        <div>
-                            <div class="announcements_text_header">
-                                <h5>{{announcement.title}}</h5>
+    <div class="aside_container">
+        <div class="announcements_container main_section__announcements_container">
+            <h1 class="announcements_text_title">Объявления</h1>
+            {% for announcement in announcements %}
+                <div class="announcements announcements_container__announcements">
+                    <div class="announcements_header">
+                        <div class="announcements_avatar">
+                            <img src={{announcement.avatar_url}}>
+                        </div>
+                        <div class="announcements_preview">
+                            <div>
+                                <div class="announcements_text_header">
+                                    <h5>{{announcement.title}}</h5>
+                                </div>
+                                <div class="announcements_author">
+                                    <h5>{{announcement.author}}</h5>
+                                </div>
                             </div>
-                            <div class="announcements_author">
-                                <h5>{{announcement.author}}</h5>
+                            <div class="announcements_date">
+                                <h5>{{announcement.date|localize}}</h5>
                             </div>
                         </div>
-                        <div class="announcements_date">
-                            <h5>{{announcement.date|localize}}</h5>
-                        </div>
+                    </div>
+                    
+                    <div class="announcements_text">
+                        <h5>{{announcement.text|linebreaks}}</h5>
                     </div>
                 </div>
-                
-                <div class="announcements_text">
-                    <h5>{{announcement.text|linebreaks}}</h5>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

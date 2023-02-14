@@ -15,6 +15,17 @@ html, body{
 }
 
 .registration_form_button1 {
-    margin-top: 18px;
+    margin-top: 32px;
 }
 
+.common_form {
+    width: 512px;
+}
+
+.common_form_input_field {
+    width: 100%;
+}
+
+.aside_container {
+    height: 100%;
+}

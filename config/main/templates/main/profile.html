@@ -16,122 +16,126 @@
 </head>
 <body>
     {% include 'main/navigation.html' %}
-    <div class="main_div">
-        <h1 class="h1_profile_header">
-            Личный кабинет
-        </h1>
-        <div class="common_form up_container">
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="profile_form">
-                    <div>
-                        <div>Имя</div>
-                        <div class="input_fields"> <input type="text" name="name" placeholder="Введите имя..." class="common_form_input_field" value="{{name}}"> </div>
-                        <div class="text_fields">Фамилия</div>
-                        <div class="input_fields"> <input type="text" name="surname" placeholder="Введите фамилию..." class="common_form_input_field" value="{{surname}}"></div>
+    <div class="aside_container">
+        <div class="main_div">
+            <h1 class="h1_profile_header">
+                Личный кабинет
+            </h1>
+            <div id="profile_block" class="common_form up_container">
+                <form method="post" enctype="multipart/form-data" id="profile_form">
+                    {% csrf_token %}
+                    <div class="profile_form">
+                        <div>
+                            <div class="label_field">Имя</div>
+                            <div class="input_fields"> <input type="text" name="name" placeholder="Введите имя..." class="common_form_input_field" value="{{name}}"> </div>
+                            <div class="text_fields">Фамилия</div>
+                            <div class="input_fields"> <input type="text" name="surname" placeholder="Введите фамилию..." class="common_form_input_field" value="{{surname}}"></div>
+                        </div>
+
+                        <div id="city_email_block">
+                            <div class="label_field">Город</div>
+                            <div class="input_fields"> <input type="text" name="city" placeholder="Введите город..." class="common_form_input_field" value="{{city}}"></div>
+                            <div class="text_fields">Email</div>
+                            <div class="input_fields"> <input type="email" name="email" placeholder="Введите email..." class="common_form_input_field" value="{{email}}"></div>
+                        </div>
+
+                        <div id="about_block">
+                            <div class="label_field">Информация о себе</div>
+                            <div class="input_fields"> <textarea rows="5" cols="33" name="bio" placeholder="Расскажите о себе..." class="common_form_input_field bio_textarea_size">{{bio}}</textarea></div>
+                        </div>
+
+                        <div class="input_avatar_image">
+                            <div class="label_field">Картинка профиля</div>
+                            <img class="avatar_image" src="media/{{avatar}}">
+                            <label class="input-file">
+                                <input type="file" name="avatar">
+                                <span>Изменить</span>
+                            </label>
+                        </div>
+                        <div class="button_submit">
+                            <button class="button1 button1_padding green-button button1_size" type="submit">Обновить</button>
+                        </div>
                     </div>
-
-                    <div>
-                        <div>Город</div>
-                        <div class="input_fields"> <input type="text" name="city" placeholder="Введите город..." class="common_form_input_field" value="{{city}}"></div>
-                        <div class="text_fields">Email</div>
-                        <div class="input_fields"> <input type="email" name="email" placeholder="Введите email..." class="common_form_input_field" value="{{email}}"></div>
-                    </div>
-
-                    <div>
-                        <div>Информация о себе</div>
-                        <div class="input_fields"> <textarea rows="5" cols="33" name="bio" placeholder="Расскажите о себе..." class="common_form_input_field bio_textarea_size">{{bio}}</textarea></div>
-                    </div>
-
-                    <div class="input_avatar_image">
-                        <img class="avatar_image" src="media/{{avatar}}">
-                        <label class="input-file">
-                            <input type="file" name="avatar">
-                            <span>Изменить</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="button_submit">
-                    <button class="button1 button1_padding green-button button1_size" type="submit">Обновить</button>
-                </div>
-            </form>
+                    
+                </form>
 
 
-        </div>
-
-
-        {% if role == 'admin' or role == 'author' %}
-        <h3 class="heading">
-            Список ваших курсов
-        </h3>
-
-        <div class="common_form down_container">
-            {% for c in created_courses %}
-            <div class="course_info">
-                <a class="link_to_course" href="/course/{{c.id}}">
-                <div class="link_div">
-                    <div class="div_course_image"><img class="course_image" src="{{c.course_image.url}}" alt=""></div>
-                    <p class="course_text">{{c.title}}</p>
-                </div>
-                </a>
             </div>
-            {% endfor %}
-        </div>
-        {% endif %}
 
 
-        <h3 class="heading">
-            Список отслеживаемых курсов
-        </h3>
+            {% if role == 'admin' or role == 'author' %}
+            <h3 class="heading">
+                Список ваших курсов
+            </h3>
 
-
-        <div class="common_form down_container">
-
-            {% for c in subscribed_courses %}
-            <div class="course_info">
-                <a class="link_to_course" href="/course/{{c.id}}">
-                <div class="link_div">
-                    <div class="div_course_image"><img class="course_image" src="{{c.course_image.url}}" alt=""></div>
-                    <p class="course_text">{{c.title}}</p>
+            <div class="common_form down_container">
+                {% for c in created_courses %}
+                <div class="course_info">
+                    <a class="link_to_course" href="/course/{{c.id}}">
+                    <div class="link_div">
+                        <div class="div_course_image"><img class="course_image" src="{{c.course_image.url}}" alt=""></div>
+                        <p class="course_text">{{c.title}}</p>
+                    </div>
+                    </a>
                 </div>
-                </a>
-            </div>
-            {% endfor %}
-
-
-        </div>
-
-        {% if role == 'admin'%}
-        <h3 class="heading">
-            Список пользователей сайта
-        </h3>
-        <div class="common_form down_container">
-
-
-            <table class="data_table">
-                <tr>
-                    {% for name in users_table_names %}
-                        <th class="table_head">{{name}}</th>
-                    {% endfor %}
-                </tr>
-                {% for row in users_table %}
-                <tr>
-                    {% for key, value in row.items %}
-                        {% if key == 6 %}
-                            <td class="table_data">
-                                <img class="avatar_in_table" src="media/{{value}}" alt="">
-                            </td>
-                        {% else %}
-                            <td class="table_data">{{value}}</td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
                 {% endfor %}
-            </table>
+            </div>
+            {% endif %}
+
+
+            <h3 class="heading">
+                Список отслеживаемых курсов
+            </h3>
+
+
+            <div class="common_form down_container">
+
+                {% for c in subscribed_courses %}
+                <div class="course_info">
+                    <a class="link_to_course" href="/course/{{c.id}}">
+                    <div class="link_div">
+                        <div class="div_course_image"><img class="course_image" src="{{c.course_image.url}}" alt=""></div>
+                        <p class="course_text">{{c.title}}</p>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+
+            </div>
+
+            {% if role == 'admin'%}
+            <h3 class="heading">
+                Список пользователей сайта
+            </h3>
+            <div class="common_form down_container">
+
+
+                <table class="data_table">
+                    <tr>
+                        {% for name in users_table_names %}
+                            <th class="table_head">{{name}}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in users_table %}
+                    <tr>
+                        {% for key, value in row.items %}
+                            {% if key == 6 %}
+                                <td class="table_data">
+                                    <img class="avatar_in_table" src="media/{{value}}" alt="">
+                                </td>
+                            {% else %}
+                                <td class="table_data">{{value}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+
         </div>
-        {% endif %}
-
-
     </div>
 </body>
 </html>

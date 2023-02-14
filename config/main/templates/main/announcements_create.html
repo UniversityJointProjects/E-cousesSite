@@ -15,13 +15,13 @@
 </head>
 <body>
     {% include 'main/navigation.html' %}
-    <div class="announcement_form_container">
+    <div class="aside_container">
         <h1 class="announcements_text_title">Создать объявление</h1>
-        <form class="common_form" method="post">
+        <form class="common_form common_form_modifier" method="post">
             {% csrf_token %}
-            <label id="title_label">Заголовок объявления</label>
+            <p class="common_form_name common_form__common_form_name">Заголовок объявления</p>
             {{form.title}}
-            <label id="text_label">Текст объявления</label>
+            <p class="common_form_name common_form__common_form_name">Текст объявления</p>
             {{form.text}}
             
             <p class = "error_notification">{{ error }}</p>

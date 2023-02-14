@@ -16,20 +16,22 @@
 <body>
     {% include 'main/navigation.html' %}
 
-    <div class="registration_form_container">
-        <form class="common_form" method="post">
-            {% csrf_token %}
-            <h2 class="common_form__common_form_title">Registration</h2>
-            <div class="common_form_name common_form__common_form_name">Username</div>
-            <input type="text" name="username" placeholder="Enter login..." class="common_form_input_field">
-            <div class="common_form_name common_form__common_form_name">Password</div>
-            <input type="password" name="password1" placeholder="Enter password..." class="common_form_input_field">
-            <div class="common_form_name common_form__common_form_name">Repeat password</div>
-            <input type="password" name="password2" placeholder="Enter password..." class="common_form_input_field">
-            {{form.errors}}
-<!--            <button class="register_button" type="submit">Register</button>-->
-            <button class="button1 button1_padding cyan-button registration_form_button1" type="submit">Register</button>
-        </form>
+    <div class="aside_container">
+        <div class="registration_form_container">
+            <form class="common_form" method="post">
+                {% csrf_token %}
+                <h2 class="common_form__common_form_title">Registration</h2>
+                <div class="common_form_name common_form__common_form_name">Username</div>
+                <input type="text" name="username" placeholder="Enter login..." class="common_form_input_field">
+                <div class="common_form_name common_form__common_form_name">Password</div>
+                <input type="password" name="password1" placeholder="Enter password..." class="common_form_input_field">
+                <div class="common_form_name common_form__common_form_name">Repeat password</div>
+                <input type="password" name="password2" placeholder="Enter password..." class="common_form_input_field">
+                {{form.errors}}
+    <!--            <button class="register_button" type="submit">Register</button>-->
+                <button class="button1 button1_padding cyan-button registration_form_button1" type="submit">Register</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

@@ -98,7 +98,7 @@ html, body{
     color: white;
     display: flex;
     flex-direction: column;
-    align-item: center;
+    align-items: center;
     background-color: var(--darkgrey2-color);
     padding: 25px;
     border-radius: 15px;
@@ -110,10 +110,6 @@ html, body{
     font-size: 15px;
     margin-top: 15px;
     margin-bottom: 3px;
-}
-
-.common_form_title_first_modifier {
-
 }
 
 .common_form_input_field {
@@ -143,4 +139,12 @@ html, body{
 
 .split_point {
     margin: 0 5px 0 5px;
+}
+
+
+
+
+.aside_container {
+    margin-left: var(--navigation-offset);
+    padding: 48px;
 }

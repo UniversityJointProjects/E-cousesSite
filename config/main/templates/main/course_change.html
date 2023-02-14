@@ -16,34 +16,36 @@
 <body>
     {% include 'main/navigation.html' %}
 
-    <form class="course_change_body" method="post" enctype="multipart/form-data">
-        <div class="common_form common_form_modifier">
-            {% csrf_token %}
-            <h1 class="course_change_body_title course_change_body__course_change_body_title">Добавить курс</h1>
-            <p class="common_form_name common_form__common_form_name">Заголовок</p>
-            {{ course_form.title }}
-            <p class="common_form_name common_form__common_form_name">Обложка курса</p>
-            {{ course_form.course_image }}
-<!--            <p class="common_form_name common_form__common_form_name">Автор</p>-->
-<!--            {{ course_form.author_id }}-->
-<!--            <p class="common_form_name common_form__common_form_name">Дата</p>-->
-<!--            {{ course_form.date }}-->
-            <p class="common_form_name common_form__common_form_name">Время на прочтение</p>
-            {{ course_form.time_to_read }}
-            <p class="common_form_name common_form__common_form_name">Описание</p>
-            {{ course_form.description }}
-            <div class="ckeditor_container">
-                <p class="common_form_name common_form__common_form_name">Контент</p>
-                {{ course_form.media }}
-                {{ course_form.content }}
+    <div class="aside_container">
+        <h1 class="course_change_body_title course_change_body__course_change_body_title">Добавить курс</h1>
+        <form class="course_change_body" method="post" enctype="multipart/form-data">
+            <div class="common_form common_form_modifier">
+                {% csrf_token %}
+                <p class="common_form_name common_form__common_form_name">Заголовок</p>
+                {{ course_form.title }}
+                <p class="common_form_name common_form__common_form_name">Обложка курса</p>
+                {{ course_form.course_image }}
+    <!--            <p class="common_form_name common_form__common_form_name">Автор</p>-->
+    <!--            {{ course_form.author_id }}-->
+    <!--            <p class="common_form_name common_form__common_form_name">Дата</p>-->
+    <!--            {{ course_form.date }}-->
+                <p class="common_form_name common_form__common_form_name">Время на прочтение</p>
+                {{ course_form.time_to_read }}
+                <p class="common_form_name common_form__common_form_name">Описание</p>
+                {{ course_form.description }}
+                <div class="ckeditor_container">
+                    <p class="common_form_name common_form__common_form_name">Контент</p>
+                    {{ course_form.media }}
+                    {{ course_form.content }}
+                </div>
+                <p class="error course_change_body__error">{{ error }}</p>
+                <div class="submit_button_container course_change_body__submit_button_container">
+                    <button class="button1 button1_padding green-button course_change_form_button1"
+                            type="submit">Подтвердить</button>
+                </div>
             </div>
-            <p class="error course_change_body__error">{{ error }}</p>
-            <div class="submit_button_container course_change_body__submit_button_container">
-                <button class="button1 button1_padding green-button course_change_form_button1"
-                        type="submit">Подтвердить</button>
-            </div>
-        </div>
 
-    </form>
+        </form>
+    </div>
 </body>
 </html>

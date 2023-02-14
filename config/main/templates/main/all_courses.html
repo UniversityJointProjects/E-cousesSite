@@ -15,7 +15,8 @@
 </head>
 <body>
     {% include 'main/navigation.html' %}
-    {% include 'main/registration_panel.html' %}
+    <div class="aside_container">
+      <h1 class="courses_text_title">Все курсы</h1>
     <div class="all_courses_body">
     {% for c in courses %}
       <div class="common_form course">
@@ -52,6 +53,7 @@
       </div>
     {% endfor %}
     </div>
+</div>
 
 
 <!--    <div class="all_courses_body">-->

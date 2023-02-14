@@ -19,15 +19,12 @@ body{
 
 .timetable_container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
 }
 
 .main_section__timetable_container {
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: auto;
+    /* margin-top: 50px; */
+
 }
 
 .timetable_container__timetable {
@@ -46,8 +43,8 @@ body{
 
 .timetable_text_title {
     width: 100%;
-    text-align: center;
     color: white;
+    margin-bottom: 24px;
 }
 
 .timetable_text {
@@ -103,7 +100,6 @@ table th {
 
 #tw_container {
     display: flex;
-    align-items: center;
     flex-direction: column;
 }
 
@@ -117,7 +113,7 @@ table th {
 }
 
 .tw_weekday_container .tw_subject_lecturer {
-    color: #e0e0e0;
+    color: #c0c0c0;
 }
 
 .tw_weekday_container h5 {
@@ -133,7 +129,6 @@ table th {
 }
 
 .timetable_weekday {
-    width: 133%;
     background-color: #404040;
     border-radius: 8px;
     margin-bottom: 24px;

@@ -1,37 +1,68 @@
 {% load static %}
 <aside class="navigation_sidebar">
-        <link rel="stylesheet" href="{% static 'main/css/navigation.css'%}">
-        <img src="{% static 'main/img/logo.png' %}" alt="logo">
-        <span class="logo">Amnis</span>
-        <ul class="navigation_list navigation_sidebar__navigation_list">
-            {% if user.is_authenticated %}
-            <a class="navigation_list_ref" href="{% url 'profile' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Личный кабинет</li>
-            </a>
-            <hr>
-            {% endif %}
-            <a class="navigation_list_ref" href="{% url 'introduce' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Ваши курсы</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'introduce' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Расписание</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'all_courses' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Все курсы</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'course_change' command='add' course_id=0 %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Создание курса (Админ)</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'announcements' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Объявления</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'announcements_create' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Создать объявление</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'timetable' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Расписание занятий</li>
-            </a>
-        </ul>
-</aside>
+    <link rel="stylesheet" href="{% static 'main/css/navigation.css'%}">
 
-<div class="sidebar_placeholder"></div>
+    <a href="/" style="color: white; text-decoration: none;">
+        <div id="logo_holder">
+            <img src="{% static 'main/img/logo.png' %}" alt="logo">
+            <span id="logo_desc">Amnis</span>
+        </div>
+    </a>
+    
+    {% if user.is_authenticated %}
+        <div id="user_card">
+            <div id="user_preview">
+                <img id="ava" src="/media/{{ava}}">
+                <div id="user_info">
+                    <h4 id="user_id">{{user}}</h4>
+                    <h5 id="user_role">{{role}}</h5>
+                </div>
+                <a id="to_profile" href="{% url 'profile' %}"><img id="to_profile_img" src="/static/main/img/arrow.svg"></a>
+            </div>
+            <a id="logout" href="{% url 'logout' %}">Выйти</a>
+        </div>
+    {% else %}
+        <div id="anon_card">
+            <div id="anon_preview">
+                <img id="anon_ava" src="/static/main/img/dummy_avatar.svg">
+                <h4 id="anon_id">Аноним</h4>
+            </div>
+            <a id="to_login" href="{% url 'login_view' %}">Войти</a>
+            <a id="to_reg" href="{% url 'registration' %}">Зарегистироваться</a>
+        </div>
+    {% endif %}
+    <hr>
+
+    <div class="navigation_list">
+        <a class="navigation_list_ref" href="{% url 'all_courses' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/all_courses.svg">
+                <h5>Все курсы</h5>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'timetable' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/timetable.svg">
+                <h5>Расписание занятий</h5>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'announcements' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/announcements.svg">
+                <h5>Объявления</h5>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'course_change' command='add' course_id=0 %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/course_create.svg">
+                <h5>Создание курса</h5>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'announcements_create' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/announcements_create.svg">
+                <h5>Создать объявление</h5>
+            </div>
+        </a>
+    </div>
+</aside>

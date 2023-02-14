@@ -10,24 +10,39 @@ html, body{
 .course_change_body {
     display: flex;
     flex-direction: column;
-    padding: 25px;
 }
 
 .common_form_modifier {
-    padding: 30px;
+    padding: 24px;
+}
+
+.common_form {
+    align-items: flex-start;
 }
 
 .course_change_body_title {
-
+    margin-bottom: 24px;
 }
 
-.course_change_body__course_change_body_title {
+.common_form_name {
+    margin: 0;
 }
+
+.common_form_name ~ .common_form_name{
+    margin-top: 16px;
+}
+
+.common_form input, .common_form textarea {
+    width: 100%;
+}
+
 
 .ckeditor_container {
     display: flex;
     align-items: left;
     flex-direction: column;
+    margin-top: 16px;
+    width: 100%;
 }
 
 .submit_button_container {

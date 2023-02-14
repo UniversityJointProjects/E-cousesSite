@@ -183,6 +183,15 @@ class CreateAnnouncementForm(ModelForm):
     class Meta:
         model = Announcement
         fields = ['title', "date", "author", 'text']
+    
+        widgets = {
+            "title": forms.TextInput(
+                attrs={'class': 'common_form_input_field',
+                    'placeholder': 'Введите заголовок...'}),
+            "text": forms.Textarea(
+                attrs={'class': 'common_form_input_field',
+                    'placeholder': 'Введите текст...'}) 
+        }
 
 
 class ProfileInfoForm(ModelForm):
@@ -222,7 +231,7 @@ class CourseForm(ModelForm):
             "title": forms.TextInput(
                 attrs={'class': 'common_form_input_field',
                        'placeholder': 'Введите заголовок...'}),
-            "text": forms.Textarea(
+            "content": forms.Textarea(
                 attrs={'class': 'common_form_input_field',
                        'placeholder': 'Введите текст...'}),
             "course_image": forms.FileInput(
