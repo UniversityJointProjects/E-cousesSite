@@ -65,7 +65,7 @@
             Список ваших курсов
         </h3>
 
-        <div class="common_form down_container">
+        <div class="common_form courses_container">
             {% for c in created_courses %}
             <div class="course_info">
                 <a class="link_to_course" href="/course/{{c.id}}">
@@ -85,7 +85,7 @@
         </h3>
 
 
-        <div class="common_form down_container">
+        <div class="common_form courses_container">
 
             {% for c in subscribed_courses %}
             <div class="course_info">
@@ -98,16 +98,14 @@
             </div>
             {% endfor %}
 
-
         </div>
 
         {% if role == 'admin'%}
         <h3 class="heading">
             Список пользователей сайта
         </h3>
-        <div class="common_form down_container">
 
-
+        <div class="common_form users_list_container">
             <table class="data_table">
                 <tr>
                     {% for name in users_table_names %}
@@ -130,7 +128,6 @@
             </table>
         </div>
         {% endif %}
-
 
     </div>
 </body>

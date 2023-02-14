@@ -282,6 +282,10 @@ def rich_text_editor(request):
 
 def course_subscription_verification(request, course_id, command):
     user = request.user
+
+    if not user.is_authenticated:
+        return redirect('introduce')
+
     profile = ProfileInfo.objects.filter(login=user.username)[0]
 
     if command == 'unsubscribe':
