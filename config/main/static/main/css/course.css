@@ -56,3 +56,49 @@ html, body{
 .ref:hover {
     color: var(--magenta-color-hover);
 }
+
+.pass_button {
+    display: flex;
+    width: 100%;
+    justify-content: left;
+}
+
+.mark_as_passed {
+    text-decoration: none;
+    color: var(--magenta-color);
+    border: 3px solid var(--magenta-color);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.mark_as_passed:hover {
+    text-decoration: none;
+    color: var(--magenta-color-hover);
+    border: 3px solid var(--magenta-color-hover);
+}
+
+.mark_as_passed:active {
+    text-decoration: none;
+    color: var(--magenta-color-active);
+    border: 3px solid var(--magenta-color-active);
+}
+
+.passed {
+    text-decoration: none;
+    color: var(--add-green-color);
+    border: 3px solid var(--add-green-color);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.passed:hover {
+    text-decoration: none;
+    color: var(--add-green-color-hover);
+    border: 3px solid var(--add-green-color-hover);
+}
+
+.passed:active {
+    text-decoration: none;
+    color: var(--add-green-color-active);
+    border: 3px solid var(--add-green-color-active);
+}

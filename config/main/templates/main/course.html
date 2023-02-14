@@ -41,6 +41,11 @@
 <!--    </div>-->
 
     <div class="course_body">
+        <div class="pass_button"><a href="" class="mark_as_passed">Пометить как пройдено</a></div>
+        <br>
+        <div class="pass_button"><a href="" class="passed">Пройдено</a></div>
+
+
         {% if user.is_authenticated %}
             {% if isSubscribed %}
                 <div class="leave_button"><a class="button1 button1_padding magenta-button" href="{% url 'course_subscription_verification' course_id=course.id command='unsubscribe' %}">Отписаться от курса</a></div>
@@ -53,7 +58,6 @@
             <a class="ref" href="{% url 'all_courses'%}">Все курсы</a> /
             <span>{{course.title}}</span>
         </div>
-
 
         <h1 class="course_title">{{course.title}}</h1>
         <div class="sub_title">
