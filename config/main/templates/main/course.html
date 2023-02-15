@@ -12,10 +12,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'main/css/common.css'%}">
     <link rel="stylesheet" href="{% static 'main/css/course.css'%}">
+    <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+    <script src="{% static 'main/js/jquery-3.6.3.js' %}"></script>
+    <script src="{% static 'main/js/course_progress.js' %}"></script>
 </head>
 <body>
     {% include 'main/navigation.html' %}
     {% include 'main/registration_panel.html' %}
+    <div class="progress_help_div" user_id="{{user.id}}" course_id="{{course.id}}"></div>
 
 <!--    <div class="course_body">-->
 <!--        <p class="site_path">-->
@@ -41,10 +45,9 @@
 <!--    </div>-->
 
     <div class="course_body">
-        <div class="pass_button"><a href="" class="mark_as_passed">Пометить как пройдено</a></div>
+        <div class="pass_button"><div class="mark_as_passed">Пометить как пройдено</div></div>
         <br>
-        <div class="pass_button"><a href="" class="passed">Пройдено</a></div>
-
+        <div class="pass_button"><div  class="passed">Пройдено</div></div>
 
         {% if user.is_authenticated %}
             {% if isSubscribed %}

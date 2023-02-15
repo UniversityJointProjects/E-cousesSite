@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from django.contrib.auth.models import Group
 from django.core.files.storage import default_storage
+from django.http import HttpResponseBadRequest, JsonResponse
 
 from .forms import *
 from django.shortcuts import render, redirect
@@ -243,16 +244,17 @@ def get_tag_content(tag_code) -> str:
     return tag_code[content_start:(content_end + 1)]
 
 
-def parse_mark_as_passed(html) -> str:
-    tag_opening = '<div class="pass_button"><a href="" class="mark_as_passed">'
+def parse_mark_as_passed(html, button_id) -> str:
+    tag_opening = f'<div class="pass_button" button_id="{button_id}"><div class="mark_as_passed">'
     tag_content = get_tag_content(html)
-    tag_closing = '</a></div>'
+    tag_closing = '</div></div>'
     return tag_opening + tag_content + tag_closing
 
-def parse_passed(html) -> str:
-    tag_opening = '<div class="pass_button"><a href="" class="passed">'
+
+def parse_passed(html, button_id) -> str:
+    tag_opening = f'<div class="pass_button" button_id="{button_id}"><div class="passed">'
     tag_content = get_tag_content(html)
-    tag_closing = '</a></div>'
+    tag_closing = '</div></div>'
     return tag_opening + tag_content + tag_closing
 
 
@@ -316,12 +318,11 @@ def parse_progress(html, user, course) -> str:
                 progresses[0].save()
 
             progress_state = getattr(progresses[0], "state")
-            print(progresses[0])
 
             if progress_state:
-                part = parse_passed(html[tag_range[0]:tag_range[1] + 1])
+                part = parse_passed(html[tag_range[0]:tag_range[1] + 1], button_id)
             else:
-                part = parse_mark_as_passed(html[tag_range[0]:tag_range[1] + 1])
+                part = parse_mark_as_passed(html[tag_range[0]:tag_range[1] + 1], button_id)
 
             html = html[0:tag_range[0]] + part + html[tag_range[1] + 1:]
         current_entry += 1
@@ -418,3 +419,25 @@ def course_subscription_verification(request, course_id, command):
         profile.course.add(course_id)
 
     return redirect('course', course_id)
+
+
+def save_progress(request):
+    button_id = request.POST.get('button_id')
+    user_id = request.POST.get('user_id')
+    course_id = request.POST.get('course_id')
+    state = request.POST.get('state') == 'true'
+
+    progresses = CourseProgress.objects.get(button_id=button_id, course=course_id, user=user_id)
+    progresses.state = state
+    progresses.save()
+
+    # progresses = CourseProgress.objects.filter(button_id=button_id, course=course_id, user=user_id)
+
+
+
+    return JsonResponse({})
+
+
+
+
+
