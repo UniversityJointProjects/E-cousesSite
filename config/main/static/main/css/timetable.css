@@ -167,3 +167,43 @@ table th {
     background-color: #404040;
     border-radius: 8px;
 }
+
+.wd_heading {
+    display: flex;
+    justify-content: space-between;
+    background-color: #173F4C;
+    padding: 8px 12px;
+    border-radius: 8px 8px 0 0;
+    align-items: center;
+}
+
+.wd_heading h4 {
+    margin: 0;
+}
+
+.wd_heading a {
+    background-color: #c70d4b;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+.wd_heading a:hover {
+    background-color: #df1558;
+}
+
+.wd_info {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;
+}
+
+.wd_si_subject {
+    font-size: 22px;
+}
+
+.wd_si_teach_loc {
+    font-size: 22px;
+}

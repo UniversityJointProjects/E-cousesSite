@@ -43,17 +43,18 @@
         <h1 class="timetable_text_title" id="timetable_edit_title">Изменение расписания</h1>
         {% for item in data %}
             <div class="weekday">
-                <div class="">
-                    <h5>{{item.weekday}}</h5>
+                <div class="wd_heading">
+                    <h4>{{item.weekday}}</h4>
                     <a href="/">Удалить</a>
                 </div>
-                <div>
-                    {{item.subject}}
-                    {{item.teacher}}
-                </div>
-                <div>
-                    {{item.building_room}}
-                    {{item.time}}
+                <div class="wd_info">
+                    <div class="wd_sub_info">
+                        <h5 class="wd_si_subject">{{item.subject}}</h5>
+                        <h5 class="wd_si_teach_loc">{{item.teacher_location}}</h5>
+                    </div>
+                    <div class="wd_time_bounds">
+                        {{item.time}}
+                    </div>
                 </div>
             </div>
         {% endfor %}
