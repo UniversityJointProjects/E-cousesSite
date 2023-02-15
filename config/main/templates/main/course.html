@@ -45,10 +45,6 @@
 <!--    </div>-->
 
     <div class="course_body">
-        <div class="pass_button"><div class="mark_as_passed">Пометить как пройдено</div></div>
-        <br>
-        <div class="pass_button"><div  class="passed">Пройдено</div></div>
-
         {% if user.is_authenticated %}
             {% if isSubscribed %}
                 <div class="leave_button"><a class="button1 button1_padding magenta-button" href="{% url 'course_subscription_verification' course_id=course.id command='unsubscribe' %}">Отписаться от курса</a></div>

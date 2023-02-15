@@ -245,16 +245,16 @@ def get_tag_content(tag_code) -> str:
 
 
 def parse_mark_as_passed(html, button_id) -> str:
-    tag_opening = f'<div class="pass_button" button_id="{button_id}"><div class="mark_as_passed">'
+    tag_opening = f'<div class="progress_button" button_id="{button_id}">'
     tag_content = get_tag_content(html)
-    tag_closing = '</div></div>'
+    tag_closing = '</div>'
     return tag_opening + tag_content + tag_closing
 
 
 def parse_passed(html, button_id) -> str:
-    tag_opening = f'<div class="pass_button" button_id="{button_id}"><div class="passed">'
+    tag_opening = f'<div class="progress_button" button_id="{button_id}">'
     tag_content = get_tag_content(html)
-    tag_closing = '</div></div>'
+    tag_closing = '</div>'
     return tag_opening + tag_content + tag_closing
 
 
@@ -295,36 +295,28 @@ def parse_progress(html, user, course) -> str:
     current_entry = 0
     while tag_range[0] != -1 and tag_range[1] != -1:
         tag_range = get_tag_range(html, "passed", 0)
+        if user.id is None:
+            html = html[0:tag_range[0]] + html[tag_range[1] + 1:]
+        else:
+            attributes = get_tag_attributes(html[tag_range[0]:tag_range[1] + 1], "passed", 0)
+            if len(attributes) > 0:
+                button_id = attributes["button_id"]
+                progresses = CourseProgress.objects.filter(button_id=button_id, course=course, user=user)
+                if len(progresses) <= 0:
+                    progresses = [CourseProgress()]
+                    setattr(progresses[0], "user", user)
+                    setattr(progresses[0], "course", course)
+                    setattr(progresses[0], "button_id", button_id)
+                    setattr(progresses[0], "state", False)
+                    progresses[0].save()
 
+                progress_state = getattr(progresses[0], "state")
 
-        # print(tag_range)
-
-        # tag_range = get_tag_range(html[tag_range[0]:tag_range[1]], "passed", 0)
-        # sub_str = html[tag_range[0]:tag_range[1]]
-        # soup = BeautifulSoup(sub_str, 'html.parser')
-        # attributes = soup.find("passed").attrs
-
-        attributes = get_tag_attributes(html[tag_range[0]:tag_range[1] + 1], "passed", 0)
-
-        if len(attributes) > 0:
-            button_id = attributes["button_id"]
-            progresses = CourseProgress.objects.filter(button_id=button_id, course=course, user=user)
-            if len(progresses) <= 0:
-                progresses = [CourseProgress()]
-                setattr(progresses[0], "user", user)
-                setattr(progresses[0], "course", course)
-                setattr(progresses[0], "button_id", button_id)
-                setattr(progresses[0], "state", False)
-                progresses[0].save()
-
-            progress_state = getattr(progresses[0], "state")
-
-            if progress_state:
-                part = parse_passed(html[tag_range[0]:tag_range[1] + 1], button_id)
-            else:
-                part = parse_mark_as_passed(html[tag_range[0]:tag_range[1] + 1], button_id)
-
-            html = html[0:tag_range[0]] + part + html[tag_range[1] + 1:]
+                if progress_state:
+                    part = parse_passed(html[tag_range[0]:tag_range[1] + 1], button_id)
+                else:
+                    part = parse_mark_as_passed(html[tag_range[0]:tag_range[1] + 1], button_id)
+                html = html[0:tag_range[0]] + part + html[tag_range[1] + 1:]
         current_entry += 1
     return html
 
@@ -430,14 +422,30 @@ def save_progress(request):
     progresses = CourseProgress.objects.get(button_id=button_id, course=course_id, user=user_id)
     progresses.state = state
     progresses.save()
-
     # progresses = CourseProgress.objects.filter(button_id=button_id, course=course_id, user=user_id)
-
-
-
     return JsonResponse({})
 
 
+def get_progress_state(request):
+    button_id = request.POST.get('button_id')
+    user_id = request.POST.get('user_id')
+    course_id = request.POST.get('course_id')
 
+    progresses = CourseProgress.objects.filter(button_id=button_id, course=course_id, user=user_id)
+
+    return JsonResponse({'state': progresses[0].state})
+
+
+def switch_progress_state(request):
+    button_id = request.POST.get('button_id')
+    user_id = request.POST.get('user_id')
+    course_id = request.POST.get('course_id')
+
+    progresses = CourseProgress.objects.get(button_id=button_id, course=course_id, user=user_id)
+    progresses.state = not progresses.state
+    state = progresses.state
+    progresses.save()
+
+    return JsonResponse({'state': state})
 
 

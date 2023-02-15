@@ -19,5 +19,7 @@ urlpatterns = [
     path('course/all_courses', views.all_courses_view, name='all_courses'),
     path('course_subscription/verification/<int:course_id>/<command>', views.course_subscription_verification, name='course_subscription_verification'),
     path('rich_text_editor', views.rich_text_editor, name='rich_text_editor'),
-    path('course/save_progress', views.save_progress, name='save_progress')
+    path('course/save_progress', views.save_progress, name='save_progress'),
+    path('course/get_progress_state', views.get_progress_state, name='get_progress_state'),
+    path('course/switch_progress_state', views.switch_progress_state, name='switch_progress_state')
 ]

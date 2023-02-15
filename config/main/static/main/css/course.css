@@ -9,8 +9,9 @@ html, body{
 
 .course_body {
     display: flex;
-    padding: 50px;
     flex-direction: column;
+    align-items: start;
+    padding: 50px;
 }
 
 .ref {
@@ -102,3 +103,43 @@ html, body{
     color: var(--add-green-color-active);
     border: 3px solid var(--add-green-color-active);
 }
+
+.progress_button {
+    text-decoration: none;
+    color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.progress_button_activated {
+    color: var(--add-green-color);
+    border-color: var(--add-green-color);
+}
+
+.progress_button_activated:hover {
+    color: var(--add-green-color-hover);
+    border-color: var(--add-green-color-hover);
+}
+
+.progress_button_activated:active {
+    color: var(--add-green-color-active);
+    border-color: var(--add-green-color-active);
+}
+
+.progress_button_deactivated {
+    color: var(--magenta-color);
+    border-color: var(--magenta-color);
+}
+
+.progress_button_deactivated:hover {
+    color: var(--magenta-color-hover);
+    border-color: var(--magenta-color-hover);
+}
+
+.progress_button_deactivated:active {
+    color: var(--magenta-color-active);
+    border-color: var(--magenta-color-active);
+}
+
