@@ -1,0 +1,81 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Amnis | Courses</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/logo.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'main/css/common.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/all_courses.css'%}">
+</head>
+<body>
+    {% include 'main/navigation.html' %}
+    <div class="aside_container">
+      <h1 class="courses_text_title">Все курсы</h1>
+    <div class="all_courses_body">
+    {% for c in courses %}
+      <div class="common_form course">
+        <div class="image_and_desc">
+            <div class="img_container">
+                <img class="course_image" src="/media/{{ c.course_image }}">
+            </div>
+            <div class="course_desc course__course_desc">
+              <h2 class="course_title_h">
+                <a class="course_title" href="{% url 'course' course_id=c.id %}">{{c.title}}</a>
+              </h2>
+              <div class="author_and_time_to_pass">
+                <p class="author">{{c.author_id.username}}</p>
+                <div class="split_point">•</div>
+                <p class="time_to_pass author_and_time_to_pass__time_to_pass">{{c.date}}</p>
+                <div class="split_point">•</div>
+                <p class="time_to_pass author_and_time_to_pass__time_to_pass">{{c.time_to_read}} на прохождение</p>
+              </div>
+              <p class="course_desc">
+                  {{c.description}}
+              </p>
+            </div>
+        </div>
+        {% if user == c.author_id or role == 'admin'  %}
+            <div class="course_editing">
+                <a href="{% url 'course_change' command='update' course_id=c.id %}" class="button1 buttons_td__button1 course_editing__button1_modifier cyan-button">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
+                <a href="" class="button1 course_editing__button1_modifier magenta-button">
+                    <i class="bi bi-trash3-fill"></i>
+                </a>
+            </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    </div>
+</div>
+
+
+<!--    <div class="all_courses_body">-->
+<!--      <div class="common_form course">-->
+<!--        <div class="img_container">-->
+<!--            <div class="temp_img_placeholder"></div>-->
+<!--        </div>-->
+<!--        <div class="course_desc course__course_desc">-->
+<!--          <h2 class="course_title_h">-->
+<!--            <a class="course_title" href="">Практика 2-го курса "Вычислительная техника" (Научно-исследовательская работа)</a>-->
+<!--          </h2>-->
+<!--          <div class="author_and_time_to_pass">-->
+<!--            <p class="author">Spectre</p>-->
+<!--            <p class="time_to_pass author_and_time_to_pass__time_to_pass">• 5 дней на прохождение</p>-->
+<!--          </div>-->
+<!--          <p class="course_desc">-->
+<!--              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at-->
+<!--              minus pariatur similique! Accusantium aliquid blanditiis, excepturi labore laborum-->
+<!--              minus pariatur similique! Accusantium aliquid blanditiis, excepturi labore laborum-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+</body>
+</html>

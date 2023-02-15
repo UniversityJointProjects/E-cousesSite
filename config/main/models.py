@@ -1,6 +1,7 @@
 import datetime as datetime
 from django.db import models
-
+from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 
 class ShopQuality(models.Model):
     cleanliness = models.IntegerField('Cleanliness')
@@ -140,6 +141,37 @@ class ScheduleEvent(models.Model):
         verbose_name = "Schedule event"
         verbose_name_plural = "Schedule event"
 
+class Course(models.Model):
+
+    title = models.CharField('Title', max_length=250)
+    course_image = models.ImageField('Course image', upload_to="photo_files", null=True, blank=True)
+    author_id = models.ForeignKey(User, blank=True, on_delete=models.CASCADE)
+    date = models.DateField('Date', blank=True, default=datetime.date(1, 1, 1))
+    time_to_read = models.CharField('Time to read', max_length=50)
+    description = models.CharField('Description', max_length=500)
+    # content = RichTextField(blank=True, null=True)
+    content = models.TextField('Content')
+
+    def __str__(self):
+        return str(self.title)
+
+    class Meta:
+        verbose_name = "Course"
+        verbose_name_plural = "Courses"
+
+
+class CourseFile(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course_file = models.FileField(upload_to="courses_files")
+    file_name = models.CharField('File name', max_length=100)
+
+    def __str__(self):
+        return str(self.file_name)
+
+    class Meta:
+        verbose_name = "Course file"
+        verbose_name_plural = "Course files"
+
 
 class Article(models.Model):
     title = models.CharField('Title', max_length=50)
@@ -153,3 +185,77 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'News'
         verbose_name_plural = 'News'
+
+
+
+
+class Announcement(models.Model):
+    class Meta:
+        verbose_name = "Объявление"
+        verbose_name_plural = "Объявления"
+
+    title = models.CharField("Title", max_length=50)
+    date = models.DateField("Date")
+    author = models.CharField("Author", max_length=50)
+    text = models.TextField("Text")
+
+
+class ProfileInfo(models.Model):
+    class Meta:
+        verbose_name = "Профиль"
+        verbose_name_plural = "Профили"
+
+    names = ["id", "Логин", "Имя", "Фамилия", "Город", "Email", "BIO", "Фото"]
+
+    def get_dict(self, ):
+        return {'id': self.id, 0: self.login, 1: self.name, 2: self.surname,
+                3: self.city, 4: self.email, 5: self.bio, 6: self.avatar}
+
+    login = models.CharField("Login", max_length=150)
+    name = models.CharField("Name", max_length=50)
+    surname = models.CharField("Surname", max_length=50)
+    city = models.CharField("City", max_length=50)
+    email = models.EmailField("Email", max_length=50)
+    bio = models.CharField("Bio", max_length=300)
+    avatar = models.ImageField("Avatar", upload_to='avatars')
+    course = models.ManyToManyField(Course)
+
+    def __str__(self):
+        return self.login + " _"
+
+
+class Timetable(models.Model):
+    class Meta:
+        verbose_name = "Расписание"
+        verbose_name_plural = "Расписание"
+    
+    WEEKDAYS = (
+        ("MONDAY", "Понедельник"),
+        ("TUESDAY", "Вторник"),
+        ("WEDNESDAY", "Среда"),
+        ("THURSDAY", "Четверг"),
+        ("FRIDAY", "Пятница"),
+        ("SATURDAY", "Суббота"),
+        ("SUNDAY", "Воскресенье"),
+    )
+
+    weekday = models.CharField(max_length=12, choices=WEEKDAYS, default="MONDAY")
+    subject = models.TextField("Subject")
+    teacher = models.TextField("Teacher")
+    building_room = models.TextField("Builing and room")
+    time_start = models.TimeField("Start Time")
+    time_end = models.TimeField("End Time")
+
+
+class CourseProgress(models.Model):
+    class Meta:
+        verbose_name = "Прогресс курса"
+        verbose_name_plural = "Прогрессы курсов"
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    button_id = models.IntegerField('Button id')
+    state = models.BooleanField('State', default=False)
+
+    def __str__(self):
+        return f'{str(self.user)} - курс: {str(self.course)}, кнопка: {str(self.button_id)}, состояние: {str(self.state)}'

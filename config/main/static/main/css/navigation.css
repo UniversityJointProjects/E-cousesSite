@@ -1,52 +1,208 @@
+:root {
+    --navigation-width: 320px;
+    --horizontal-padding: 24px;
+    --border-width: 2px;
+    --navigation-offset: calc(var(--navigation-width) + 2*var(--horizontal-padding) + var(--border-width));
+}
 
 .navigation_sidebar {
-    float: left;
+    position: fixed;
     background: #181818;
-    width: 330px;
-    padding: 2.5%;
-    height: 100vh;
-    color: #fff;
-    border-right: 2px solid #4d4d4d;
-}
-
-.navigation_sidebar__navigation_list {
-    margin-top: 40px;
-}
-
-.navigation_sidebar img{
-    width: 80px;
-    float: left;
-}
-
-.logo {
-    font-size: 40px;
-    margin-left: 10px;
-    font-weight: bold;
-    position: relative;
-    top: 10px;
+    width: var(--navigation-width);
+    padding: 16px var(--horizontal-padding);
+    height: 100%;
+    color: white;
+    border-right: var(--border-width) solid #4d4d4d;
+    box-sizing: content-box;
 }
 
 .navigation_list {
-    list-style: none
+    padding: 0;
+    box-sizing: content-box;
+    height: 100%;
+    margin-top: 24px;
 }
 
-.navigation_list_element, .navigation_sidebar .navigation_list a {
+.navigation_list hr {
+    margin: 24px 0;
+}
+
+.navigation_list_ref {
     text-decoration: none;
 }
 
-.navigation_sidebar .navigation_list li {
-    color: #fff;
-    display: block;
-    margin-top: 20px;
-    transition: transform .05s ease;
+.nav_list_sect {
+    display: flex;
+    flex-direction: row;
+    background-color: #2f2f2f;
+    border-radius: 8px;
+    padding: 8px 12px;
+    align-items: center;
+    margin-bottom: 12px;
+    transition: all 0.15s ease;
 }
 
-.navigation_sidebar .navigation_list li:hover, .navigation_sidebar .navigation_list a:hover {
-    //color: #5fced7;
-    color: #f23f9c;
+.nav_list_sect:hover {
+    background-color: #3a3a3a;
+}
+
+.nav_list_sect h5 {
+    color: white;
+    margin: 0;
+}
+
+.nav_sect_img {
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+}
+
+
+
+
+#logo_holder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+#logo_holder img {
+    width: 80px;
+}
+
+#logo_desc {
+    font-size: 42px;
+    margin-left: 16px;
+    font-weight: bold;
+}
+
+#anon_card, #user_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #363636;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+#anon_ava, #ava {
+    width: 56px;
+    height: 56px;
+    margin-right: 16px;
+    border-radius: 100%;
+}
+
+#anon_preview, #user_preview {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 12px 16px;
+    justify-content: space-between;
+}
+
+#anon_id, #user_id {
+    font-size: 24px;
+    margin: 0;
+    color: white;
+}
+
+#to_login, #to_reg, #logout {
+    padding: 4px 15px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    color: black;
     text-decoration: none;
-    transform: scale(1.05)
 }
 
-.navigation_and_main {
+#to_reg, #logout {
+    background-color: var(--magenta-color);
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#to_reg {
+    margin-left: 10px;
+}
+
+#logout {
+    background-color: var(--magenta-color);
+}
+
+#to_login {
+    background-color: var(--cyan-color);
+    border-radius: 15px;
+}
+
+#to_login:hover {
+    background-color: var(--cyan-color-hover);
+}
+
+#to_reg:hover {
+    background-color: var(--magenta-color-hover);
+}
+
+#logout:hover {
+    background-color: var(--magenta-color-hover);
+}
+
+
+
+
+#to_profile {
+    margin-left: 10px;
+}
+
+#to_profile_img {
+    width: 32px;
+    height: 32px;
+}
+
+#to_profile:hover {
+    transform: translateX(4px);
+    transition: .5s;
+}
+
+#to_profile:not(hover) {
+    transform: translateX(-4px);
+    transition: .5s;
+}
+
+#user_info {
+    display: flex;
+    flex-direction: column;
+}
+
+#user_role {
+    font-size: 18px;
+    margin: 0;
+    color: lightgray;
+    font-weight: normal;
+}
+
+.nav_sect_label {
+    color: white;
+    transition: all 0.15s ease;
+}
+
+.nav_sect_label:hover {
+    color: var(--magenta-color)
+}
+
+.login_and_reg {
+    margin-top: 5px;
+    margin-bottom: 16px;
+}
+
+.anon_container {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+}
+
+.user_info_and_ava {
+    display: flex;
 }

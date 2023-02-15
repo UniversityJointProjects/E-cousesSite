@@ -1,11 +1,11 @@
-html{
+html {
     padding: 0;
     margin: 0;
     width: 100%;
     height: 100%;
 }
 
-body{
+body {
     padding: 0;
     margin: 0;
     width: 100%;
@@ -19,17 +19,7 @@ body{
 
 .introduction_container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-}
-
-.main_section__introduction_container {
-    margin-top: 50px;
-}
-
-.introduction_container__introduction {
-    margin: 0 30px 0 30px;
 }
 
 .introduction {
@@ -41,8 +31,8 @@ body{
 
 .introduction_text_title {
     width: 100%;
-    text-align: center;
     color: white;
+    margin-bottom: 24px;
 }
 
 .introduction_text {
@@ -50,7 +40,8 @@ body{
 }
 
 .introduction__list {
-    margin-top: 20px;
+    font-size: 18px;
+    padding-left: 20px;
 }
 
 .introduction_list__element {

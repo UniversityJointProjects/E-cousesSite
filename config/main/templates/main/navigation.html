@@ -1,24 +1,88 @@
 {% load static %}
 <aside class="navigation_sidebar">
-        <link rel="stylesheet" href="{% static 'main/css/navigation.css'%}">
-        <img src="{% static 'main/img/logo.png' %}" alt="logo">
-        <span class="logo">Amnis</span>
-        <ul class="navigation_list navigation_sidebar__navigation_list">
-            <a class="navigation_list_ref" href="{% url 'introduce' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Личный кабинет</li>
-            </a>
-            <hr>
-            <a class="navigation_list_ref" href="{% url 'introduce' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Ваши курсы</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'schedule' month=0 year=0 %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Расписание</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'introduce' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Все курсы</li>
-            </a>
-            <a class="navigation_list_ref" href="{% url 'introduce' %}">
-                <li class="navigation_list_element"><i class="bi bi-list-task"></i>  Создание курса (Админ)</li>
-            </a>
-        </ul>
+    <link rel="stylesheet" href="{% static 'main/css/navigation.css'%}">
+
+    <a href="/" style="color: white; text-decoration: none;">
+        <div id="logo_holder">
+            <img src="{% static 'main/img/logo.png' %}" alt="logo">
+            <span id="logo_desc">Amnis</span>
+        </div>
+    </a>
+    
+    {% if user.is_authenticated %}
+        <div id="user_card">
+            <div id="user_preview">
+                <div class="user_info_and_ava">
+                    <img id="ava" src="/media/{{ava}}">
+                    <div id="user_info">
+                        <h4 id="user_id">{{user}}</h4>
+                        <h5 id="user_role">{{role}}</h5>
+                    </div>
+                </div>
+                
+                <a id="to_profile" href="{% url 'profile' %}"><img id="to_profile_img" src="/static/main/img/arrow.svg"></a>
+            </div>
+            <a id="logout" href="{% url 'logout' %}">Выйти</a>
+        </div>
+    {% else %}
+        <div id="anon_card">
+            <div class="anon_container">
+                <div id="anon_preview">
+                    <img id="anon_ava" src="/static/main/img/dummy_avatar.svg">
+                    <h4 id="anon_id">Аноним</h4>
+                </div>
+            </div>
+            <div class="login_and_reg">
+                <a id="to_login" href="{% url 'login_view' %}">Войти</a>
+                <a id="to_reg" href="{% url 'registration' %}">Зарегистироваться</a>
+            </div>     
+        </div>
+    {% endif %}
+    <hr>
+
+    <div class="navigation_list">
+        <a class="navigation_list_ref" href="{% url 'all_courses' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/all_courses.svg">
+                <div class="nav_sect_label">Все курсы</div>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'timetable' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/timetable.svg">
+                <div class="nav_sect_label">Расписание занятий</div>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'announcements' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/announcements.svg">
+                <div class="nav_sect_label">Объявления</div>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'course_change' command='add' course_id=0 %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/course_create.svg">
+                <div class="nav_sect_label">Создание курса</div>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'announcements_create' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/announcements_create.svg">
+                <div class="nav_sect_label">Создать объявление</div>
+            </div>
+        </a>
+        <a class="navigation_list_ref" href="{% url 'timetable_edit' %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/edit_timetable.svg">
+                <div class="nav_sect_label">Изменить расписание</div>
+            </div>
+        </a>
+
+        <a class="navigation_list_ref" href="{% url 'schedule' month=0 year=0 %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/edit_timetable.svg">
+                <div class="nav_sect_label">Календарь</div>
+            </div>
+        </a>
+    </div>
 </aside>

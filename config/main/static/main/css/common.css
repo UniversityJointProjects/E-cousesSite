@@ -29,6 +29,16 @@
     --dark-cyan-color: #173f4c;
 
     --reference_color: #75b6e7;
+    --error-red-color: #ff5757;
+}
+
+html, body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#111111;
+    color: white;
 }
 
 .green-button {
@@ -105,7 +115,7 @@
     color: white;
     display: flex;
     flex-direction: column;
-    align-item: center;
+    align-items: center;
     background-color: var(--darkgrey2-color);
     padding: 25px;
     border-radius: 15px;
@@ -117,10 +127,6 @@
     font-size: 15px;
     margin-top: 15px;
     margin-bottom: 3px;
-}
-
-.common_form_title_first_modifier {
-
 }
 
 .common_form_input_field {
@@ -167,4 +173,15 @@
 
 .common_text {
     color: white;
+}
+.split_point {
+    margin: 0 5px 0 5px;
+}
+
+
+
+
+.aside_container {
+    margin-left: var(--navigation-offset);
+    padding: 48px;
 }

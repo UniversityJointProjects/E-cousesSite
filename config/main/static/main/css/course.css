@@ -1,0 +1,160 @@
+html, body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#111111;
+    color: white;
+}
+
+.course_body {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 50px;
+}
+
+.ref {
+    color: #75b6e7;
+}
+
+.course_body__course_subtitle {
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.leave_button {
+    display: flex;
+    justify-content: right;
+}
+
+.site_path {
+    display: flex;
+    font-size: 13px;
+}
+
+.author {
+    color: var(--magenta-color);
+}
+
+.sub_title {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 32px;
+    font-size: 15px;
+}
+
+.course_title {
+    margin: 0;
+}
+
+.ref {
+    color: var(--magenta-color);
+    text-decoration: none;
+}
+
+.ref:hover {
+    color: var(--magenta-color-hover);
+}
+
+
+
+#course_title_and_action_button {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.button1 {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 12px 24px;
+    white-space: nowrap;
+}
+.pass_button {
+    display: flex;
+    width: 100%;
+    justify-content: left;
+}
+
+.mark_as_passed {
+    text-decoration: none;
+    color: var(--magenta-color);
+    border: 3px solid var(--magenta-color);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.mark_as_passed:hover {
+    text-decoration: none;
+    color: var(--magenta-color-hover);
+    border: 3px solid var(--magenta-color-hover);
+}
+
+.mark_as_passed:active {
+    text-decoration: none;
+    color: var(--magenta-color-active);
+    border: 3px solid var(--magenta-color-active);
+}
+
+.passed {
+    text-decoration: none;
+    color: var(--add-green-color);
+    border: 3px solid var(--add-green-color);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.passed:hover {
+    text-decoration: none;
+    color: var(--add-green-color-hover);
+    border: 3px solid var(--add-green-color-hover);
+}
+
+.passed:active {
+    text-decoration: none;
+    color: var(--add-green-color-active);
+    border: 3px solid var(--add-green-color-active);
+}
+
+.progress_button {
+    text-decoration: none;
+    color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.progress_button_activated {
+    color: var(--add-green-color);
+    border-color: var(--add-green-color);
+}
+
+.progress_button_activated:hover {
+    color: var(--add-green-color-hover);
+    border-color: var(--add-green-color-hover);
+}
+
+.progress_button_activated:active {
+    color: var(--add-green-color-active);
+    border-color: var(--add-green-color-active);
+}
+
+.progress_button_deactivated {
+    color: var(--magenta-color);
+    border-color: var(--magenta-color);
+}
+
+.progress_button_deactivated:hover {
+    color: var(--magenta-color-hover);
+    border-color: var(--magenta-color-hover);
+}
+
+.progress_button_deactivated:active {
+    color: var(--magenta-color-active);
+    border-color: var(--magenta-color-active);
+}
+
