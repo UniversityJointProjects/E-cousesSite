@@ -447,5 +447,3 @@ def switch_progress_state(request):
     progresses.save()
 
     return JsonResponse({'state': state})
-
-
