@@ -32,12 +32,8 @@ def get_role(user):
 
 def get_ava(user):
     if user.is_authenticated:
-        try:
-            profiles_ava = ProfileInfo.objects.filter(name=user).get().avatar
-
-            return profiles_ava
-        except Exception:
-            return ""
+        profiles_ava = ProfileInfo.objects.filter(login=user).get().avatar
+        return profiles_ava
     else:
         return ""
 
@@ -492,7 +488,7 @@ def course_change_view(request, command, course_id):
                 form.instance.author_id = request.user
                 form.instance.date = datetime.datetime.now().date()
                 form.save()
-                return redirect('introduce')
+                return redirect('all_courses')
             else:
                 error = 'Вы ввели некорректные данные*'
         elif command == 'update':
@@ -510,6 +506,10 @@ def course_change_view(request, command, course_id):
     if command == 'update':
         updated_course = Course.objects.filter(id=course_id)[0]
         course_form = CourseForm(instance=updated_course)
+
+    if command == 'delete':
+        Course.objects.filter(id=course_id).delete()
+        return redirect('all_courses')
 
     return render(request, 'main/course_change.html', {'course_form': course_form, 'error': error, 'role': role, 'ava': ava})
 

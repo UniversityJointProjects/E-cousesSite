@@ -45,7 +45,7 @@
                 <a href="{% url 'course_change' command='update' course_id=c.id %}" class="button1 buttons_td__button1 course_editing__button1_modifier cyan-button">
                     <i class="bi bi-pencil-fill"></i>
                 </a>
-                <a href="" class="button1 course_editing__button1_modifier magenta-button">
+                <a href="{% url 'course_change' command='delete' course_id=c.id %}" class="button1 course_editing__button1_modifier magenta-button">
                     <i class="bi bi-trash3-fill"></i>
                 </a>
             </div>

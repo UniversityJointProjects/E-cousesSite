@@ -19,7 +19,7 @@ urlpatterns = [
     path('schedule/delete_event', views.delete_event, name='delete_event'),
     path('profile', views.profile, name='profile'),
     # LOGOUT_REDIRECT_URL
-    path('logout', include('django.contrib.auth.urls'), name='logout'),
+    path('logout', include('django.contrib.auth.urls'), name='logout', kwargs={'next_page': '/introduce'}),
     path('course/<int:course_id>', views.course_view, name='course'),
     path('course/course_change/<command>/<int:course_id>', views.course_change_view, name='course_change'),
     path('course/all_courses', views.all_courses_view, name='all_courses'),
