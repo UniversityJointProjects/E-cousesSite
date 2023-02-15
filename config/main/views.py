@@ -82,6 +82,27 @@ def timetable(request):
     return render(request, "main/timetable.html", {'role': role, 'ava': ava})
 
 
+def timetable_edit(request):
+    role = get_role(request.user)
+    ava = get_ava(request.user)
+    form = TimetableForm
+
+    if request.method == "POST":
+        caform = TimetableForm(request.POST)
+
+        if caform.is_valid():
+            caform.save()
+            return redirect('timetable')
+
+    timetable_els = Timetable.objects.all()
+    timetable_data = []
+
+    for item in timetable_els:
+        pass#print(f"{item.WEEKDAYS[item.weekday]}")
+
+    return render(request, "main/timetable_edit.html", {'role': role, 'ava': ava, "form": form, "data": timetable_data})
+
+
 
 
 def change_table(request, url_table_id, entry_id, command):

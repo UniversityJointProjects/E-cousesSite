@@ -200,3 +200,29 @@ class ProfileInfo(models.Model):
 
     def __str__(self):
         return self.login + " _"
+
+
+
+
+class Timetable(models.Model):
+    class Meta:
+        verbose_name = "Расписание"
+        verbose_name_plural = "Расписание"
+    
+    WEEKDAYS = (
+        ("MONDAY", "Понедельник"),
+        ("TUESDAY", "Вторник"),
+        ("WEDNESDAY", "Среда"),
+        ("THURSDAY", "Четверг"),
+        ("FRIDAY", "Пятница"),
+        ("SATURDAY", "Суббота"),
+        ("SUNDAY", "Воскресенье"),
+    )
+
+    weekday = models.CharField(max_length=12, choices=WEEKDAYS, default="MONDAY")
+    subject = models.TextField("Subject")
+    teacher = models.TextField("Teacher")
+    building_room = models.TextField("Builing and room")
+    time_start = models.TimeField("Start Time")
+    time_end = models.TimeField("End Time")
+

@@ -250,3 +250,24 @@ class CourseForm(ModelForm):
                 attrs={'class': 'common_form_input_field',
                        'placeholder': 'Введите описание...'})
         }
+
+
+class TimetableForm(ModelForm):
+    class Meta:
+        model = Timetable
+        fields = ['weekday', 'subject', 'teacher', 'building_room', 'time_start', 'time_end']
+
+        widgets = {
+            "weekday": forms.Select(attrs={'class': 'common_form_input_field'}),
+            "subject": forms.TextInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите наименование предмета...'}),
+            "teacher": forms.TextInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите ФИО преподавателя...'}),
+            "building_room": forms.TextInput(
+                attrs={'class': 'common_form_input_field',
+                       'placeholder': 'Введите корпус и кабинет (в формате 3-306)...'}),
+            "time_start": forms.TimeInput(attrs={'class': 'common_form_input_field', "type": "time"}),
+            "time_end": forms.TimeInput(attrs={'class': 'common_form_input_field', "type": "time"})
+        }

@@ -109,3 +109,7 @@ body{
     grid-area: C;
     margin-top: 2px;
 }
+
+.announcements_date h5 {
+    white-space: nowrap;
+}

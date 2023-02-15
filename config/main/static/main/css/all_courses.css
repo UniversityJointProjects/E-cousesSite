@@ -96,6 +96,7 @@ html, body {
     justify-content: left;
     align-items: end;
     align-self: flex-start;
+    margin-left: 48px;
 }
 
 .course_editing__button1_modifier {

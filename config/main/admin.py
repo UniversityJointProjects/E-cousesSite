@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, Shop, ShopQuality, Check, Director, Firm, Product, Announcement, ProfileInfo, Course, CourseFile
+from .models import Article, Shop, ShopQuality, Check, Director, Firm, Product, Announcement, ProfileInfo, Course, CourseFile, Timetable
 
 admin.site.register(Article)
 admin.site.register(Shop)
@@ -14,3 +14,4 @@ admin.site.register(ProfileInfo)
 admin.site.register(Course)
 admin.site.register(CourseFile)
 
+admin.site.register(Timetable)

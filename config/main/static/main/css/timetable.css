@@ -140,3 +140,22 @@ table th {
     padding: 8px 12px;
     border-radius: 8px 8px 0 0;
 }
+
+
+.common_form {
+    padding: 8px 24px;
+    align-items: stretch;
+}
+
+.common_form_name ~ .common_form_name {
+    margin-top: 24px;
+}
+
+.button1 {
+    margin: 16px 0;
+}
+
+
+#timetable_edit_title {
+    margin-top: 32px;
+}
