@@ -8,6 +8,7 @@ urlpatterns = [
     path('announcements_create', views.announcements_create, name="announcements_create"),
     path('timetable', views.timetable, name="timetable"),
     path('timetable_edit', views.timetable_edit, name="timetable_edit"),
+    path('timetable_remove/<int:pk>', views.timetable_remove, name="timetable_remove"),
     path('table_show/<int:tk>', views.table_view, name='table_show'),
     path('change_table/<int:url_table_id>/<int:entry_id>/<command>', views.change_table, name='change_table'),
     path('registration', views.registration, name='registration'),

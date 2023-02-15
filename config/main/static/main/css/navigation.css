@@ -99,7 +99,7 @@
     width: 100%;
     align-items: center;
     padding: 12px 16px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 #anon_id, #user_id {
@@ -153,7 +153,7 @@
 
 
 #to_profile {
-    margin-left: 10px;
+    margin-left: auto;
 }
 
 #to_profile_img {

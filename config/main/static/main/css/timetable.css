@@ -114,6 +114,7 @@ table th {
 
 .tw_weekday_container .tw_subject_lecturer {
     color: #c0c0c0;
+    font-size: 20px;
 }
 
 .tw_weekday_container h5 {
@@ -127,6 +128,12 @@ table th {
     color: darkgrey;
     margin: 12px 0;
 }
+
+
+.tw_weekday_container hr:last-of-type {
+    display: none;
+}
+
 
 .timetable_weekday {
     background-color: #404040;
@@ -157,7 +164,7 @@ table th {
 
 
 #timetable_edit_title {
-    margin-top: 32px;
+    margin-top: 48px;
 }
 
 
@@ -166,6 +173,10 @@ table th {
 .weekday {
     background-color: #404040;
     border-radius: 8px;
+}
+
+.weekday + .weekday {
+    margin-top: 24px;
 }
 
 .wd_heading {
@@ -196,8 +207,10 @@ table th {
 
 .wd_info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 12px 14px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .wd_si_subject {
@@ -205,5 +218,10 @@ table th {
 }
 
 .wd_si_teach_loc {
-    font-size: 22px;
+    font-size: 20px;
+    color: #c9c9c9;
+}
+
+.wd_time_bounds {
+    font-size: 18px;
 }

@@ -45,7 +45,7 @@
             <div class="weekday">
                 <div class="wd_heading">
                     <h4>{{item.weekday}}</h4>
-                    <a href="/">Удалить</a>
+                    <a href="{% url 'timetable_remove' item.idx %}">Удалить</a>
                 </div>
                 <div class="wd_info">
                     <div class="wd_sub_info">

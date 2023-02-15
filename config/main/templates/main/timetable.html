@@ -23,82 +23,107 @@
                 <div class="timetable_weekday">
                     <h3>Понедельник</h3>
                     <div class="tw_weekday_container">
-                        <div class="tw_subject">
-                            <div>
-                                <h4 class="tw_subject_title">Лек. Теория автоматов</h4>
-                                <h4 class="tw_subject_lecturer">Лылова А.В. (3-314)</h4>
+                        {% for item in data.Понедельник %}
+                            <div class="tw_subject">
+                                <div>
+                                    <h4 class="tw_subject_title">{{ item.subject }}</h4>
+                                    <h4 class="tw_subject_lecturer">{{ item.teacher_location }}</h4>
+                                </div>
+                                <h5>{{ item.time }}</h5>
                             </div>
-                            <h5>10:00 – 11:20</h5>
-                        </div>
-                        <hr>
-                        <div class="tw_subject">
-                            <div>
-                                <h4 class="tw_subject_title">Пр. Физическая культура и спорт</h4>
-                                <h4 class="tw_subject_lecturer">Преподаватели кафедры (спортзал)</h4>
-                            </div>
-                            <h5>11:30 – 12:50</h5>
-                        </div>
-                        <hr>
-                        <div class="tw_subject">
-                            <div>
-                                <h4 class="tw_subject_title">Пр. Философия</h4>
-                                <h4 class="tw_subject_lecturer">Леушкин Р.В. (6-400)</h4>
-                            </div>
-                            <h5>13:30 – 14:50</h5>
-                        </div>
+                            <hr>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="timetable_weekday">
                     <h3>Вторник</h3>
                     <div class="tw_weekday_container">
-                        <div class="tw_subject">
-                            <div>
-                                <h4 class="tw_subject_title">Лаб. Разработка профессиональных приложений</h4>
-                                <h4 class="tw_subject_lecturer">Исхаков И.И. (3-306)</h4>
+                        {% for item in data.Вторник %}
+                            <div class="tw_subject">
+                                <div>
+                                    <h4 class="tw_subject_title">{{ item.subject }}</h4>
+                                    <h4 class="tw_subject_lecturer">{{ item.teacher_location }}</h4>
+                                </div>
+                                <h5>{{ item.time }}</h5>
                             </div>
-                            <h5>10:00 – 11:20</h5>
-                        </div>
-                        <hr>
-                        <div class="tw_subject">
-                            <div>
-                                <h4 class="tw_subject_title">Пр. Иностранный язык</h4>
-                                <h4 class="tw_subject_lecturer">Матросова Т.А. (6-503)</h4>
-                            </div>
-                            <h5>11:30 – 12:50</h5>
-                        </div>
+                            <hr>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="timetable_weekday">
                     <h3>Среда</h3>
                     <div class="tw_weekday_container">
-                        <div class="tw_subject">
-                            <div>
-                                <h4 class="tw_subject_title">Лаб. Инженерная и компьютерная графика</h4>
-                                <h4 class="tw_subject_lecturer">Войт Н.Н. (3-306)</h4>
+                        {% for item in data.Среда %}
+                            <div class="tw_subject">
+                                <div>
+                                    <h4 class="tw_subject_title">{{ item.subject }}</h4>
+                                    <h4 class="tw_subject_lecturer">{{ item.teacher_location }}</h4>
+                                </div>
+                                <h5>{{ item.time }}</h5>
                             </div>
-                            <h5>08:30 – 09:50</h5>
-                        </div>
-                        <hr>
-                        <div class="tw_subject">
-                            <div>
-                                <h4 class="tw_subject_title">Лаб. Инженерная и компьютерная графика</h4>
-                                <h4 class="tw_subject_lecturer">Войт Н.Н. (3-306)</h4>
-                            </div>
-                            <h5>10:00 – 11:20</h5>
-                        </div>
+                            <hr>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="timetable_weekday">
                     <h3>Четверг</h3>
+                    <div class="tw_weekday_container">
+                        {% for item in data.Четверг %}
+                            <div class="tw_subject">
+                                <div>
+                                    <h4 class="tw_subject_title">{{ item.subject }}</h4>
+                                    <h4 class="tw_subject_lecturer">{{ item.teacher_location }}</h4>
+                                </div>
+                                <h5>{{ item.time }}</h5>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="timetable_weekday">
                     <h3>Пятница</h3>
+                    <div class="tw_weekday_container">
+                        {% for item in data.Пятница %}
+                            <div class="tw_subject">
+                                <div>
+                                    <h4 class="tw_subject_title">{{ item.subject }}</h4>
+                                    <h4 class="tw_subject_lecturer">{{ item.teacher_location }}</h4>
+                                </div>
+                                <h5>{{ item.time }}</h5>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="timetable_weekday">
                     <h3>Суббота</h3>
+                    <div class="tw_weekday_container">
+                        {% for item in data.Суббота %}
+                            <div class="tw_subject">
+                                <div>
+                                    <h4 class="tw_subject_title">{{ item.subject }}</h4>
+                                    <h4 class="tw_subject_lecturer">{{ item.teacher_location }}</h4>
+                                </div>
+                                <h5>{{ item.time }}</h5>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="timetable_weekday">
                     <h3>Воскресенье</h3>
+                    <div class="tw_weekday_container">
+                        {% for item in data.Воскресенье %}
+                            <div class="tw_subject">
+                                <div>
+                                    <h4 class="tw_subject_title">{{ item.subject }}</h4>
+                                    <h4 class="tw_subject_lecturer">{{ item.teacher_location }}</h4>
+                                </div>
+                                <h5>{{ item.time }}</h5>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

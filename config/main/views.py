@@ -32,9 +32,12 @@ def get_role(user):
 
 def get_ava(user):
     if user.is_authenticated:
-        profiles_ava = ProfileInfo.objects.filter(name=user).get().avatar
+        try:
+            profiles_ava = ProfileInfo.objects.filter(name=user).get().avatar
 
-        return profiles_ava
+            return profiles_ava
+        except Exception:
+            return ""
     else:
         return ""
 
@@ -83,7 +86,14 @@ def timetable(request):
     role = get_role(request.user)
     ava = get_ava(request.user)
 
-    return render(request, "main/timetable.html", {'role': role, 'ava': ava})
+    timetable_els = Timetable.objects.all()
+    timetable_data = {"Понедельник": [], "Вторник": [], "Среда": [], "Четверг": [], "Пятница": [], "Суббота": [], "Воскресенье": []}
+
+    for item in timetable_els:
+        timetable_data[item.weekday].append({"subject": item.subject, "teacher_location": item.teacher + " (" + item.building_room + ")",
+                               "time": str(item.time_start)[:-3] + " – " + str(item.time_end)[:-3]})
+
+    return render(request, "main/timetable.html", {'role': role, 'ava': ava, "data": timetable_data})
 
 
 def timetable_edit(request):
@@ -96,17 +106,22 @@ def timetable_edit(request):
 
         if caform.is_valid():
             caform.save()
-            return redirect('timetable')
+            return redirect('timetable_edit')
 
     timetable_els = Timetable.objects.all()
     timetable_data = []
 
     for item in timetable_els:
-        timetable_data.append({"weekday": item.weekday, "subject": item.subject, "teacher_location": f"{item.teacher} ({item.building_room})", "time": f"{item.time_start} – {item.time_end}"})
+        timetable_data.append({"idx": item.pk, "weekday": item.weekday, "subject": item.subject, "teacher_location": f"{item.teacher} ({item.building_room})",
+                               "time": f"{str(item.time_start)[:-3]} – {str(item.time_end)[:-3]}"})
 
     return render(request, "main/timetable_edit.html", {'role': role, 'ava': ava, "form": form, "data": timetable_data})
 
 
+def timetable_remove(request, pk):
+    Timetable.objects.filter(pk=pk).delete()
+    
+    return redirect('timetable_edit')
 
 
 def change_table(request, url_table_id, entry_id, command):
@@ -209,7 +224,10 @@ def login_view(request):
 
 
 def schedule(request, month, year):
-    return render(request, 'main/schedule.html', {'month': month, 'year': year})
+    role = get_role(request.user)
+    ava = get_ava(request.user)
+
+    return render(request, 'main/schedule.html', {'month': month, 'year': year, 'role': role, 'ava': ava})
 
 
 def create_event(request):
@@ -261,6 +279,8 @@ def delete_event(request):
     if len(events) > 0:
         events[0].delete()
     return JsonResponse({})
+
+
 def profile(request):
     user = request.user
     users_table = []
