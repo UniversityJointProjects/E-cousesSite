@@ -388,16 +388,17 @@ def course_view(request, course_id):
         if user.is_authenticated:
             profile = ProfileInfo.objects.filter(login=request.user.username)[0]
             if course in profile.course.all():
-                is_subscribed = True
+                isSubscribed = True
             else:
-                is_subscribed = False
+                isSubscribed = False
 
         # attrs = get_tag_attributes('<passed class  ="kek" button_id =  "15"></passed> <passed class  ="kek" button_id =  "30"></passed>', "passed", 1)
         # print(attrs["button_id"])
         course_files = CourseFile.objects.all().filter(course=course)
         course.content = parse_html(course.content, user, course)
 
-        return render(request, 'main/course.html', {'course': course, 'course_files': course_files, 'role': role, 'ava': ava, 'isSubscribed': isSubscribed})
+        return render(request, 'main/course.html', {'course': course, 'course_files': course_files, 'role': role,
+                                                    'ava': ava, 'isSubscribed': isSubscribed})
     else:
         print('Error. There is no such course to be found.')
         return redirect('all_courses')
@@ -457,10 +458,10 @@ def course_subscription_verification(request, course_id, command):
         return redirect('introduce')
 
     profile = ProfileInfo.objects.filter(login=user.username)[0]
-
     if command == 'unsubscribe':
         profile.course.remove(course_id)
     elif command == 'subscribe':
+        print(course_id)
         profile.course.add(course_id)
 
     return redirect('course', course_id)
