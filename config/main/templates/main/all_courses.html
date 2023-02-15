@@ -40,7 +40,7 @@
               </p>
             </div>
         </div>
-        {% if user == c.author_id %}
+        {% if user == c.author_id or role == 'admin'  %}
             <div class="course_editing">
                 <a href="{% url 'course_change' command='update' course_id=c.id %}" class="button1 buttons_td__button1 course_editing__button1_modifier cyan-button">
                     <i class="bi bi-pencil-fill"></i>

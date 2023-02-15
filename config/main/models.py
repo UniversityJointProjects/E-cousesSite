@@ -28,7 +28,8 @@ class ShopQuality(models.Model):
 class Shop(models.Model):
     name = models.CharField('Name', max_length=50)
     employees_number = models.IntegerField('Employees number')
-    shop_quality_id = models.OneToOneField(ShopQuality, on_delete=models.CASCADE) #models.ForeignKey(ShopQuality, on_delete=models.CASCADE)
+    shop_quality_id = models.OneToOneField(ShopQuality,
+                                           on_delete=models.CASCADE)  # models.ForeignKey(ShopQuality, on_delete=models.CASCADE)
 
     title = "Shops"
     names = ["Index", "Name", "Employees number", "Shop quality id"]
@@ -68,7 +69,7 @@ class Director(models.Model):
 class Firm(models.Model):
     name = models.CharField('Name', max_length=50)
     capitalization = models.IntegerField('Capitalization')
-    directors = models.ManyToManyField(Director) #models.ForeignKey(Director, on_delete=models.CASCADE)
+    directors = models.ManyToManyField(Director)  # models.ForeignKey(Director, on_delete=models.CASCADE)
 
     title = "Firms"
     names = ["Index", "Name", "Capitalization", "Directors"]
@@ -118,6 +119,27 @@ class Check(models.Model):
         verbose_name = "Check"
         verbose_name_plural = "Checks"
 
+
+class ScheduleEvent(models.Model):
+    event_name = models.CharField(max_length=250)
+
+    minute = models.IntegerField(default=0)
+    hour = models.IntegerField(default=0)
+    day = models.IntegerField(default=0)
+    month = models.IntegerField(default=0)
+    year = models.IntegerField(default=0)
+
+    color = models.CharField(max_length=50)
+    description = models.TextField()
+
+    title = "Schedule event"
+
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
+        verbose_name = "Schedule event"
+        verbose_name_plural = "Schedule event"
 
 class Course(models.Model):
 
@@ -202,8 +224,6 @@ class ProfileInfo(models.Model):
         return self.login + " _"
 
 
-
-
 class Timetable(models.Model):
     class Meta:
         verbose_name = "Расписание"
@@ -226,3 +246,16 @@ class Timetable(models.Model):
     time_start = models.TimeField("Start Time")
     time_end = models.TimeField("End Time")
 
+
+class CourseProgress(models.Model):
+    class Meta:
+        verbose_name = "Прогресс курса"
+        verbose_name_plural = "Прогрессы курсов"
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    button_id = models.IntegerField('Button id')
+    state = models.BooleanField('State', default=False)
+
+    def __str__(self):
+        return f'{str(self.user)} - курс: {str(self.course)}, кнопка: {str(self.button_id)}, состояние: {str(self.state)}'

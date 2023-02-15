@@ -11,6 +11,10 @@
     --cyan-color-hover: #02e3dc;
     --cyan-color-active: #00bfb9;
 
+    --blue-color: #4cc2ff;
+    --blue-color-hover: #68cafc;
+    --blue-color-active: #38ade8;
+
     --magenta-color: #ea337b;
     --magenta-color-hover: #cc2d6d;
     --magenta-color-active: #b3275f;
@@ -24,6 +28,7 @@
 
     --dark-cyan-color: #173f4c;
 
+    --reference_color: #75b6e7;
     --error-red-color: #ff5757;
 }
 
@@ -71,6 +76,18 @@ html, body{
 
 .magenta-button:active {
     background-color: var(--magenta-color-active);
+}
+
+.blue-button {
+    background-color: var(--blue-color);
+}
+
+.blue-button:hover {
+    background-color: var(--blue-color-hover);
+}
+
+.blue-button:active {
+    background-color: var(--blue-color-active);
 }
 
 
@@ -137,6 +154,26 @@ html, body{
     margin: 0 0 15px 0;
 }
 
+.common_form_select {
+    background-color: var(--darkgrey-color);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+}
+
+.common_reference {
+    color: var(--reference_color);
+    text-decoration: none;
+}
+
+.common_reference:hover {
+    color: var(--reference_color);
+    text-decoration: underline;
+}
+
+.common_text {
+    color: white;
+}
 .split_point {
     margin: 0 5px 0 5px;
 }

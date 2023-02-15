@@ -12,23 +12,30 @@
     {% if user.is_authenticated %}
         <div id="user_card">
             <div id="user_preview">
-                <img id="ava" src="/media/{{ava}}">
-                <div id="user_info">
-                    <h4 id="user_id">{{user}}</h4>
-                    <h5 id="user_role">{{role}}</h5>
+                <div class="user_info_and_ava">
+                    <img id="ava" src="/media/{{ava}}">
+                    <div id="user_info">
+                        <h4 id="user_id">{{user}}</h4>
+                        <h5 id="user_role">{{role}}</h5>
+                    </div>
                 </div>
+                
                 <a id="to_profile" href="{% url 'profile' %}"><img id="to_profile_img" src="/static/main/img/arrow.svg"></a>
             </div>
             <a id="logout" href="{% url 'logout' %}">Выйти</a>
         </div>
     {% else %}
         <div id="anon_card">
-            <div id="anon_preview">
-                <img id="anon_ava" src="/static/main/img/dummy_avatar.svg">
-                <h4 id="anon_id">Аноним</h4>
+            <div class="anon_container">
+                <div id="anon_preview">
+                    <img id="anon_ava" src="/static/main/img/dummy_avatar.svg">
+                    <h4 id="anon_id">Аноним</h4>
+                </div>
             </div>
-            <a id="to_login" href="{% url 'login_view' %}">Войти</a>
-            <a id="to_reg" href="{% url 'registration' %}">Зарегистироваться</a>
+            <div class="login_and_reg">
+                <a id="to_login" href="{% url 'login_view' %}">Войти</a>
+                <a id="to_reg" href="{% url 'registration' %}">Зарегистироваться</a>
+            </div>     
         </div>
     {% endif %}
     <hr>
@@ -37,37 +44,44 @@
         <a class="navigation_list_ref" href="{% url 'all_courses' %}">
             <div class="nav_list_sect">
                 <img class="nav_sect_img" src="/static/main/img/all_courses.svg">
-                <h5>Все курсы</h5>
+                <div class="nav_sect_label">Все курсы</div>
             </div>
         </a>
         <a class="navigation_list_ref" href="{% url 'timetable' %}">
             <div class="nav_list_sect">
                 <img class="nav_sect_img" src="/static/main/img/timetable.svg">
-                <h5>Расписание занятий</h5>
+                <div class="nav_sect_label">Расписание занятий</div>
             </div>
         </a>
         <a class="navigation_list_ref" href="{% url 'announcements' %}">
             <div class="nav_list_sect">
                 <img class="nav_sect_img" src="/static/main/img/announcements.svg">
-                <h5>Объявления</h5>
+                <div class="nav_sect_label">Объявления</div>
             </div>
         </a>
         <a class="navigation_list_ref" href="{% url 'course_change' command='add' course_id=0 %}">
             <div class="nav_list_sect">
                 <img class="nav_sect_img" src="/static/main/img/course_create.svg">
-                <h5>Создание курса</h5>
+                <div class="nav_sect_label">Создание курса</div>
             </div>
         </a>
         <a class="navigation_list_ref" href="{% url 'announcements_create' %}">
             <div class="nav_list_sect">
                 <img class="nav_sect_img" src="/static/main/img/announcements_create.svg">
-                <h5>Создать объявление</h5>
+                <div class="nav_sect_label">Создать объявление</div>
             </div>
         </a>
         <a class="navigation_list_ref" href="{% url 'timetable_edit' %}">
             <div class="nav_list_sect">
                 <img class="nav_sect_img" src="/static/main/img/edit_timetable.svg">
-                <h5>Изменить расписание</h5>
+                <div class="nav_sect_label">Изменить расписание</div>
+            </div>
+        </a>
+
+        <a class="navigation_list_ref" href="{% url 'schedule' month=0 year=0 %}">
+            <div class="nav_list_sect">
+                <img class="nav_sect_img" src="/static/main/img/edit_timetable.svg">
+                <div class="nav_sect_label">Календарь</div>
             </div>
         </a>
     </div>

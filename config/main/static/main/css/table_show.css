@@ -66,3 +66,7 @@ html, body{
     border-collapse: separate;
     border-spacing: 10px;
 }
+
+.data_table_container__data_table_modifier {
+    width: 100%;
+}
