@@ -3,6 +3,8 @@ from django.contrib.auth.models import Group
 from .forms import *
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseBadRequest, JsonResponse
+import json
 
 locked_tables = [2, 3, 5]
 
@@ -122,3 +124,57 @@ def login_view(request):
             return redirect('introduce')
     return render(request, 'main/login.html', {'role': role})
 
+
+def schedule(request, month, year):
+    return render(request, 'main/schedule.html', {'month': month, 'year': year})
+
+
+def create_event(request):
+    events = ScheduleEvent.objects.filter(day=int(request.POST.get('select_day')),
+                                          month=int(request.POST.get('select_month')),
+                                          year=int(request.POST.get('select_year')))
+
+    model = ScheduleEvent()
+    if len(events) > 0:
+        model = events[0]
+
+    model.event_name = request.POST.get('name')
+
+    model.year = int(request.POST.get('select_year'))
+    model.month = int(request.POST.get('select_month'))
+    model.day = int(request.POST.get('select_day'))
+    model.hour = int(request.POST.get('select_hour'))
+    model.minute = int(request.POST.get('select_minute'))
+
+    model.color = request.POST.get('color')
+    model.description = request.POST.get('description')
+
+    model.save()
+
+    return JsonResponse({'test': 'test'})
+
+
+def get_events(request):
+    month = request.POST.get('month')
+    year = request.POST.get('year')
+
+    events = ScheduleEvent.objects.filter(month=month, year=year)
+    data_str = ""
+
+    for idx, e in enumerate(events):
+        if idx > 0:
+            data_str += '\n'
+        data_str += f'{e.event_name}, {e.minute}, {e.hour}, {e.day}, {e.month}, {e.year}, {e.color}, {e.description}'
+
+    print(f"{month} {year}")
+
+    return JsonResponse({'count_events': len(events), 'data': data_str})
+
+
+def delete_event(request):
+    events = ScheduleEvent.objects.filter(day=int(request.POST.get('day')),
+                                          month=int(request.POST.get('month')),
+                                          year=int(request.POST.get('year')))
+    if len(events) > 0:
+        events[0].delete()
+    return JsonResponse({})
