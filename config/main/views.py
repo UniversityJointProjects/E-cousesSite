@@ -98,7 +98,7 @@ def timetable_edit(request):
     timetable_data = []
 
     for item in timetable_els:
-        pass#print(f"{item.WEEKDAYS[item.weekday]}")
+        timetable_data.append({"weekday": item.weekday, "subject": item.subject, "teacher": item.teacher, "building_room": item.building_room, "time": f"{item.time_start} – {item.time_end}"})
 
     return render(request, "main/timetable_edit.html", {'role': role, 'ava': ava, "form": form, "data": timetable_data})
 

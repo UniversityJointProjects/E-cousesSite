@@ -159,3 +159,11 @@ table th {
 #timetable_edit_title {
     margin-top: 32px;
 }
+
+
+
+
+.weekday {
+    background-color: #404040;
+    border-radius: 8px;
+}

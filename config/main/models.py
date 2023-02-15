@@ -210,16 +210,16 @@ class Timetable(models.Model):
         verbose_name_plural = "Расписание"
     
     WEEKDAYS = (
-        ("MONDAY", "Понедельник"),
-        ("TUESDAY", "Вторник"),
-        ("WEDNESDAY", "Среда"),
-        ("THURSDAY", "Четверг"),
-        ("FRIDAY", "Пятница"),
-        ("SATURDAY", "Суббота"),
-        ("SUNDAY", "Воскресенье"),
+        ("Понедельник", "Понедельник"),
+        ("Вторник", "Вторник"),
+        ("Среда", "Среда"),
+        ("Четверг", "Четверг"),
+        ("Пятница", "Пятница"),
+        ("Суббота", "Суббота"),
+        ("Воскресенье", "Воскресенье"),
     )
 
-    weekday = models.CharField(max_length=12, choices=WEEKDAYS, default="MONDAY")
+    weekday = models.CharField(max_length=12, choices=WEEKDAYS, default="")
     subject = models.TextField("Subject")
     teacher = models.TextField("Teacher")
     building_room = models.TextField("Builing and room")

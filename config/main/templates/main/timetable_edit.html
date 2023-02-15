@@ -42,12 +42,20 @@
 
         <h1 class="timetable_text_title" id="timetable_edit_title">Изменение расписания</h1>
         {% for item in data %}
-            {{item.weekday}}
-            {{item.subject}}
-            {{item.teacher}}
-            {{item.building_room}}
-            {{item.time_start}}
-            {{item.time_end}}
+            <div class="weekday">
+                <div class="">
+                    <h5>{{item.weekday}}</h5>
+                    <a href="/">Удалить</a>
+                </div>
+                <div>
+                    {{item.subject}}
+                    {{item.teacher}}
+                </div>
+                <div>
+                    {{item.building_room}}
+                    {{item.time}}
+                </div>
+            </div>
         {% endfor %}
     </div>
 </body>
