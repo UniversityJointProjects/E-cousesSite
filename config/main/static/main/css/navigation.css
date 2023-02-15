@@ -39,6 +39,7 @@
     padding: 8px 12px;
     align-items: center;
     margin-bottom: 12px;
+    transition: all 0.15s ease;
 }
 
 .nav_list_sect:hover {
@@ -51,9 +52,9 @@
 }
 
 .nav_sect_img {
-    width: 36px;
-    height: 36px;
-    margin-right: 16px;
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
 }
 
 
@@ -80,6 +81,7 @@
 #anon_card, #user_card {
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: #363636;
     border-radius: 8px;
     margin-bottom: 24px;
@@ -89,12 +91,15 @@
     width: 56px;
     height: 56px;
     margin-right: 16px;
+    border-radius: 100%;
 }
 
 #anon_preview, #user_preview {
     display: flex;
+    width: 100%;
     align-items: center;
     padding: 12px 16px;
+    justify-content: space-between;
 }
 
 #anon_id, #user_id {
@@ -104,44 +109,51 @@
 }
 
 #to_login, #to_reg, #logout {
-    padding: 4px 8px;
+    padding: 4px 15px;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 #to_reg, #logout {
-    background-color: #c51a3f;
-    border-radius: 0 0 8px 8px;
+    background-color: var(--magenta-color);
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#to_reg {
+    margin-left: 10px;
 }
 
 #logout {
-    background-color: #e2024d;
+    background-color: var(--magenta-color);
 }
 
 #to_login {
-    background-color: #134fae;
+    background-color: var(--cyan-color);
+    border-radius: 15px;
 }
 
 #to_login:hover {
-    background-color: #1a60d1;
+    background-color: var(--cyan-color-hover);
 }
 
 #to_reg:hover {
-    background-color: #ee204d;
+    background-color: var(--magenta-color-hover);
 }
 
 #logout:hover {
-    background-color: #f1155f;
+    background-color: var(--magenta-color-hover);
 }
 
 
 
 
 #to_profile {
-    margin-left: auto;
+    margin-left: 10px;
 }
 
 #to_profile_img {
@@ -168,4 +180,29 @@
     font-size: 18px;
     margin: 0;
     color: lightgray;
+    font-weight: normal;
+}
+
+.nav_sect_label {
+    color: white;
+    transition: all 0.15s ease;
+}
+
+.nav_sect_label:hover {
+    color: var(--magenta-color)
+}
+
+.login_and_reg {
+    margin-top: 5px;
+    margin-bottom: 16px;
+}
+
+.anon_container {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+}
+
+.user_info_and_ava {
+    display: flex;
 }

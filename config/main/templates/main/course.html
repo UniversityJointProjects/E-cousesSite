@@ -12,33 +12,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'main/css/common.css'%}">
     <link rel="stylesheet" href="{% static 'main/css/course.css'%}">
+    <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+    <script src="{% static 'main/js/jquery-3.6.3.js' %}"></script>
+    <script src="{% static 'main/js/course_progress.js' %}"></script>
 </head>
 <body>
     {% include 'main/navigation.html' %}
-
-<!--    <div class="course_body">-->
-<!--        <p class="site_path">-->
-<!--            <span class="ref">Все курсы</span> /-->
-<!--            <span>Эпоха Звезд</span>-->
-<!--        </p>-->
-<!--        <h1 class="course_title">Эпоха Звезд</h1>-->
-<!--        <div class="sub_title">-->
-<!--            <div class="author">Spectre</div>-->
-<!--            <div class="split_point">•</div>-->
-<!--            <div class="time_to_pass author_and_time_to_pass__time_to_pass">Feb. 11, 2023</div>-->
-<!--            <div class="split_point">•</div>-->
-<!--            <div class="time_to_pass author_and_time_to_pass__time_to_pass">2 дня на прохождение</div>-->
-<!--        </div>-->
-<!--        <a class="file_ref"-->
-<!--                href="/media/courses_files/wallpapersden.com_elden-ring-hd-age-of-stars_1920x1080.jpg" download>-->
-<!--            Инструкция по технике безопасности-->
-<!--        </a><br>-->
-
-<!--        {% for f in course_files %}-->
-<!--            <a href="{{f.course_file.url}}" download>{{f.file_name}}</a><br>-->
-<!--        {% endfor %}-->
-<!--    </div>-->
-
+    <div class="progress_help_div" user_id="{{user.id}}" course_id="{{course.id}}"></div>
     <div class="aside_container">
         <div class="course_body">
             <div class="site_path">

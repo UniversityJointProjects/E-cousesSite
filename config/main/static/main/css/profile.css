@@ -90,10 +90,10 @@
 	cursor: pointer;
 	font-size: 10px;
 	vertical-align: middle;
-	color: rgb(255 255 255);
+	color: black;
 	text-align: center;
 	border-radius: 7px;
-	background-color: #223621;
+	background-color: var(--add-green-color);
 	height: 25px;
 	padding: 5px 5px;
 	box-sizing: border-box;

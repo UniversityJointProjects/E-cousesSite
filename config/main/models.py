@@ -202,8 +202,6 @@ class ProfileInfo(models.Model):
         return self.login + " _"
 
 
-
-
 class Timetable(models.Model):
     class Meta:
         verbose_name = "Расписание"
@@ -226,3 +224,16 @@ class Timetable(models.Model):
     time_start = models.TimeField("Start Time")
     time_end = models.TimeField("End Time")
 
+
+class CourseProgress(models.Model):
+    class Meta:
+        verbose_name = "Прогресс курса"
+        verbose_name_plural = "Прогрессы курсов"
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    button_id = models.IntegerField('Button id')
+    state = models.BooleanField('State', default=False)
+
+    def __str__(self):
+        return f'{str(self.user)} - курс: {str(self.course)}, кнопка: {str(self.button_id)}, состояние: {str(self.state)}'
