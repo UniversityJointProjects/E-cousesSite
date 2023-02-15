@@ -24,12 +24,17 @@
     flex-direction: column;
 }
 
-.down_container {
+.courses_container {
     margin-left: 30px;
     margin-right: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.users_list_container {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .name_fields {
@@ -88,9 +93,8 @@
 	color: rgb(255 255 255);
 	text-align: center;
 	border-radius: 7px;
-	background-color: #419152;
-	line-height: 22px;
-	height: 30px;
+	background-color: #223621;
+	height: 25px;
 	padding: 5px 5px;
 	box-sizing: border-box;
 	border: none;
@@ -113,10 +117,10 @@
 
 /* Hover/active */
 .input-file:hover span {
-	background-color: #59be6e;
+	background-color: #23cc3f;
 }
 .input-file:active span {
-	background-color: #2E703A;
+	background-color: #1eb337;
 }
 
 /* Disabled */
@@ -200,6 +204,7 @@
 .common_form {
     margin: 0;
     padding: 0;
+    flex-direction: row;
 }
 
 #profile_block {

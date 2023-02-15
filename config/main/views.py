@@ -22,7 +22,7 @@ def get_role(user):
         elif user.groups.filter(name='author').exists():
             template = "author"
         else:
-            template = "None"
+            template = "none"
     return template
 
 
@@ -260,6 +260,7 @@ def profile(request):
 
 def course_view(request, course_id):
     courses = Course.objects.all().filter(id=course_id)
+    user = request.user
     isSubscribed = False
 
     role = get_role(request.user)
@@ -267,12 +268,12 @@ def course_view(request, course_id):
     
     if len(courses):
         course = courses[0]
-        profile = ProfileInfo.objects.filter(login=request.user.username)[0]
-
-        if course in profile.course.all():
-            isSubscribed = True
-        else:
-            isSubscribed = False
+        if user.is_authenticated:
+            profile = ProfileInfo.objects.filter(login=request.user.username)[0]
+            if course in profile.course.all():
+                isSubscribed = True
+            else:
+                isSubscribed = False
 
         course_files = CourseFile.objects.all().filter(course=course)
 
@@ -331,6 +332,10 @@ def rich_text_editor(request):
 
 def course_subscription_verification(request, course_id, command):
     user = request.user
+
+    if not user.is_authenticated:
+        return redirect('introduce')
+
     profile = ProfileInfo.objects.filter(login=user.username)[0]
 
     if command == 'unsubscribe':

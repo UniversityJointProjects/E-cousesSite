@@ -58,18 +58,36 @@
                     </div>
                     
                 </form>
-
-
             </div>
+        </div>
 
 
-            {% if role == 'admin' or role == 'author' %}
-            <h3 class="heading">
-                Список ваших курсов
-            </h3>
+        {% if role == 'admin' or role == 'author' %}
+        <h3 class="heading">
+            Список ваших курсов
+        </h3>
 
-            <div class="common_form down_container">
-                {% for c in created_courses %}
+        <div class="common_form down_container">
+            {% for c in created_courses %}
+            <div class="course_info">
+                <a class="link_to_course" href="/course/{{c.id}}">
+                <div class="link_div">
+                    <div class="div_course_image"><img class="course_image" src="{{c.course_image.url}}" alt=""></div>
+                    <p class="course_text">{{c.title}}</p>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {%endif%}
+
+        <h3 class="heading">
+            Список отслеживаемых курсов
+        </h3>
+
+
+        <div class="common_form down_container">
+            {% for c in subscribed_courses %}
                 <div class="course_info">
                     <a class="link_to_course" href="/course/{{c.id}}">
                     <div class="link_div">
@@ -78,39 +96,14 @@
                     </div>
                     </a>
                 </div>
-                {% endfor %}
-            </div>
-            {% endif %}
+            {% endfor %}
+        </div>
 
-
-            <h3 class="heading">
-                Список отслеживаемых курсов
-            </h3>
-
-
-            <div class="common_form down_container">
-
-                {% for c in subscribed_courses %}
-                <div class="course_info">
-                    <a class="link_to_course" href="/course/{{c.id}}">
-                    <div class="link_div">
-                        <div class="div_course_image"><img class="course_image" src="{{c.course_image.url}}" alt=""></div>
-                        <p class="course_text">{{c.title}}</p>
-                    </div>
-                    </a>
-                </div>
-                {% endfor %}
-
-
-            </div>
-
-            {% if role == 'admin'%}
+        {% if role == 'admin'%}
             <h3 class="heading">
                 Список пользователей сайта
             </h3>
             <div class="common_form down_container">
-
-
                 <table class="data_table">
                     <tr>
                         {% for name in users_table_names %}
@@ -118,24 +111,21 @@
                         {% endfor %}
                     </tr>
                     {% for row in users_table %}
-                    <tr>
-                        {% for key, value in row.items %}
-                            {% if key == 6 %}
-                                <td class="table_data">
-                                    <img class="avatar_in_table" src="media/{{value}}" alt="">
-                                </td>
-                            {% else %}
-                                <td class="table_data">{{value}}</td>
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
+                        <tr>
+                            {% for key, value in row.items %}
+                                {% if key == 6 %}
+                                    <td class="table_data">
+                                        <img class="avatar_in_table" src="media/{{value}}" alt="">
+                                    </td>
+                                {% else %}
+                                    <td class="table_data">{{value}}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
                     {% endfor %}
                 </table>
             </div>
-            {% endif %}
-
-
-        </div>
+        {% endif %}
     </div>
 </body>
 </html>
